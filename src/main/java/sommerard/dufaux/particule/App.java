@@ -28,7 +28,7 @@ public class App
 	public static String seed;
 	public static boolean toric = false;
 	
-    public static void main( String[] args )
+    public static void main( String[] args ) throws InterruptedException
     {
     	
     	Map<String,Option> parameters = new HashMap<String,Option>();
@@ -106,10 +106,10 @@ public class App
         }
     }
     
-    public static void initSMA(){
+    public static void initSMA() throws InterruptedException{
     	SMA sma = new SMA();
-    	sma.run(nbBall, envsize, speed, seed, toric);
-    	View view = new View();
+    	int nbTurn = 100;
+    	sma.run(nbTurn, nbBall, envsize, speed, equity, seed, toric);
     	
     }
 }

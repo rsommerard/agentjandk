@@ -1,32 +1,34 @@
 package sommerard.dufaux.particule;
 
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JPanel;
 
 
-public class View extends Application{
+public class View extends JPanel implements Observer{
+
+	private int width;
+	private int height;
 	
-	public static void main(String[] args) {
-        Application.launch(args);
-    }
+	public View(int width, int height){
+		this.width = width;
+		this.height = height;
+	}
     
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Title");
-        
-        final Circle circ = new Circle(5, 5, 5);
-        final Group root = new Group(circ);
-        final Scene scene = new Scene(root, 500, 500);        
-              
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-	
-	public void update(SMA sma){
+
+	public void paintComponent(Graphics g){
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, this.width, this.height);
+		
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//this.paintComponent();
 	}
 
 }
