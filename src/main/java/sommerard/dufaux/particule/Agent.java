@@ -16,13 +16,35 @@ public class Agent {
 		this.env = env;
 	}
 	
-	
 	public void doIt(){
-		env.space[posX][posY] = 0;
-		this.posX+= dir.x;
-		this.posY+= dir.y;
-		env.space[posX][posY] = 1;
+		int nextX = posX+ dir.x;
+		int nextY = posY+ dir.y;
+
+		//System.out.println("DEBUT agent "+this+" posX = "+posX+" et posY = "+posY);
+		//on delegue la gestion de "collision" à l'env. on pourrait le faire ici...
+		if(env.isBusy(nextX, nextY)){
+			//on inverse la direction;
+			dir.x = dir.x * -1;
+			dir.y = dir.y * -1;
+
+			nextX = posX+ dir.x;
+			nextY = posY+ dir.y;
+			if(env.isBusy(nextX, nextY)){
+				//on ne bouge pas
+				nextX = posX;
+				nextY = posY;
+			}
+		}
+
+		//System.out.println("FIN agent "+this+" posX = "+posX+" et posY = "+posY);
+		
+		env.space[posX][posY] = false;
+		posX = nextX;
+		posY = nextY;
+		env.space[posX][posY] = true;
+
 	}
+
 	
 	public int getPosX() {
 		return posX;

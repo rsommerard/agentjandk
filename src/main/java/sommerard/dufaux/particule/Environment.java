@@ -4,14 +4,18 @@ import java.util.List;
 
 public class Environment {
 	
-	public int[][] space;
+	public boolean[][] space;
 	
-	public void init(){
+	public void Environment(){
 		
 	}
 	
+	public void init(int envsize){
+		space = new boolean[envsize][envsize];
+	}
+	
 	public boolean isBusy(int posX, int posY){
-		return (space[posX][posY] != 0);
+		return ((posX < 0) || (posX>space.length-1) || (posY<0) || (posY>space[0].length-1) || (space[posX][posY]));
 	}
 	
 }
