@@ -10,34 +10,53 @@ import java.util.Observable;
 
 public class SMA extends Observable{
 	
-	private List<Observer> observers;
 	private Environment environment;
 	private List<Agent> agents;
 	private Random generator;
 	
+	private boolean equity;
+	
 	public SMA(){
+		//observers = new ArrayList<Observer>();
+		agents = new ArrayList<Agent>();
 	}
 	
 
-	public void run(int nbTurn, int nbBall, int envsize, int speed, boolean equity, String seed, boolean toric) throws InterruptedException {
+	public void init(int nbTurn, int nbBall, int envsize, int speed, boolean equity, String seed, boolean toric) throws InterruptedException {
 		
-		generator = new Random(Long.parseLong(seed));
-		//View view = new View();
+		environment = new Environment();
+		environment.init(envsize);
+		
+		this.equity = equity;
+		
+		if(seed != null){
+			generator = new Random(Long.parseLong(seed));	
+		}else{
+			generator = new Random();
+		}
 		
 		initAgents(envsize, nbBall);
-		run(nbTurn, speed);
 		
+		this.setChanged();
+		this.notifyObservers(this);
 	}
+
 	
 	public void run(int nbTurn, int speed) throws InterruptedException{
 		
-		Collections.shuffle(agents, generator);
-		for(Agent k : agents){
-			k.doIt();
+		for(int i = 0; i< nbTurn; i++){
+			if(!equity){
+				Collections.shuffle(agents, generator);
+			}
+			for(Agent k : agents){
+				k.doIt();
+			}
+			
+			this.setChanged();
+			this.notifyObservers(this);
+			
+			Thread.sleep(speed);
 		}
-		
-		this.setChanged(); //update view
-		Thread.sleep(speed);
 	}
 	
 	public void initAgents(int envsize, int nbBall){
@@ -48,9 +67,13 @@ public class SMA extends Observable{
 		for(int i = 0; i < nbBall; i++){
 			posX = generator.nextInt(envsize-1);
 			posY = generator.nextInt(envsize-1);
-			direction = new Direction(1,1);
+			do{
+				direction = new Direction(generator.nextInt(2)-1,generator.nextInt(2)-1);
+			}while(direction.x == 0 && direction.y == 0);
+			
 			j = new Agent(posX,posY,direction, this.environment);
 			agents.add(j);
+			environment.space[posX][posY] = true;
 		}
 	}
 
