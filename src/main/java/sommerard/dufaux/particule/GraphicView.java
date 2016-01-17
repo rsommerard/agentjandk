@@ -9,12 +9,21 @@ import java.util.Observable;
 public class GraphicView extends JFrame implements View {
 
     private MAS mMas;
+    private boolean mGridEnable;
 
     private static final int TOP_OFFSET = 22;
 
-    public GraphicView(int width, int height, int agentSize) {
+    public GraphicView(int width, int height, int agentSize, boolean gridEnable) {
         setTitle("Particule chamber");
+
+        mGridEnable = gridEnable;
+        /*if (mGridEnable) {
+            setSize((width * agentSize) + (width + 1), (height * agentSize) + TOP_OFFSET + (height + 1));
+        } else {
+            setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
+        }*/
         setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
+
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -43,24 +52,26 @@ public class GraphicView extends JFrame implements View {
         int height = environment.getHeight();
         int agentSize = environment.getAgentSize();
 
-        graphics.setColor(Color.RED);
+        if (mGridEnable) {
+            graphics.setColor(Color.BLACK);
+
+            for (int i = 0; i <= height; i++) {
+                graphics.drawLine(0, (i * agentSize) + TOP_OFFSET, width * agentSize, (i * agentSize) + TOP_OFFSET);
+            }
+
+            for (int i = 0; i <= width; i++) {
+                graphics.drawLine((i * agentSize), 0 + TOP_OFFSET, i * agentSize, (height * agentSize) + TOP_OFFSET);
+            }
+        }
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (environment.isBusy(j, i)) {
+                    graphics.setColor(Color.RED);
                     System.out.println("print: [x: " + (j * agentSize) + ", y: " + (i * agentSize) + "]");
                     graphics.fillRect(j * agentSize, (i * agentSize) + TOP_OFFSET, agentSize, agentSize);
                 }
             }
-        }
-    }
-
-    public void drawGrid(int envSize, int agentSize){
-        Line line;
-        for(int i=0;i<envSize;i++){
-            //USELESS IN TEXTUAL VIEW
-        }
-        for(int i=0;i<envSize;i++){
-            //USELESS IN TEXTUAL VIEW
         }
     }
 

@@ -9,18 +9,17 @@ public class App
 	
 	public static int nbTurn = 1000;
 	public static int nbBall = 1;
-	public static int width = 50;
-    public static int height = 50;
-	public static int agentSize = 5;
+	public static int width = 10;
+    public static int height = 10;
+	public static int agentSize = 10;
 	public static int speed = 200;
-	public static boolean gridvisibility = false;
+	public static boolean grid = false;
 	public static boolean equity = false;
 	public static String seed;
 	public static boolean toric = false;
 	
 	
-    public static void main( String[] args ) throws InterruptedException
-    {
+    public static void main( String[] args ) throws InterruptedException {
     	
     	/*Map<String,Option> parameters = new HashMap<String,Option>();
     	
@@ -90,7 +89,7 @@ public class App
     public static void initSMA() throws InterruptedException{
 		//TextualView textualView = new TextualView();
         //MAS MAS = new MAS(textualView);
-        GraphicView graphicView = new GraphicView(width, height, agentSize);
+        GraphicView graphicView = new GraphicView(width, height, agentSize, true);
         MAS MAS = new MAS(graphicView);
     	
     	MAS.init(nbTurn, nbBall, width, height, agentSize, speed, equity, seed, toric);
