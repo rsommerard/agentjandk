@@ -1,19 +1,14 @@
 package sommerard.dufaux.particule;
 
-/**
- * Hello world!
- *
- */
-public class App
-{
+public class App {
 	
 	public static int nbTurn = 1000;
-	public static int nbBall = 1;
-	public static int width = 10;
-    public static int height = 10;
+	public static int nbBall = 3;
+	public static int width = 5;
+    public static int height = 5;
 	public static int agentSize = 10;
-	public static int speed = 200;
-	public static boolean grid = false;
+	public static int speed = 2000;
+	public static boolean grid = true;
 	public static boolean equity = false;
 	public static String seed;
 	public static boolean toric = false;
@@ -86,7 +81,7 @@ public class App
         }*/
     }
     
-    public static void initSMA() throws InterruptedException{
+    public static void initSMA() throws InterruptedException {
 		//TextualView textualView = new TextualView();
         //MAS MAS = new MAS(textualView);
         GraphicView graphicView = new GraphicView(width, height, agentSize, true);

@@ -1,5 +1,6 @@
 package sommerard.dufaux.particule;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +42,9 @@ public class MAS extends Observable {
 	public void run(int nbTurn, int speed) throws InterruptedException {
 		
 		for (int i = 0; i < nbTurn; i++) {
-			if (!equity) {
+            System.out.println("Turn: " + i);
+
+            if (!equity) {
 				Collections.shuffle(mAgents, mRandom);
 			}
 			for (Agent agent : mAgents) {
@@ -56,7 +59,7 @@ public class MAS extends Observable {
 	}
 	
 	public void initAgents(int width, int height, int nbBall){
-		for(int i = 0; i < nbBall; i++){
+		/*for(int i = 0; i < nbBall; i++){
 			int posX = mRandom.nextInt(width - 1);
 			int posY = mRandom.nextInt(height - 1);
 			int stepX = mRandom.nextInt(2) - 1;
@@ -66,10 +69,40 @@ public class MAS extends Observable {
 				stepX = mRandom.nextInt(2) - 1;
 				stepY = mRandom.nextInt(2) - 1;
 			}
-			
-			mAgents.add(new Agent(posX, posY, stepX, stepY, mEnvironment));
-			mEnvironment.setState(posX, posY, true);
-		}
+
+            Agent agent = new Agent(posX, posY, stepX, stepY, mEnvironment);
+			mAgents.add(agent);
+			mEnvironment.setAgent(posX, posY, agent);
+		}*/
+
+        // Corner bug test
+        //Agent agent = new Agent(0, 0, 1, 1, mEnvironment);
+        //mAgents.add(agent);
+        //mEnvironment.setAgent(0, 0, agent);
+
+        //agent = new Agent(2, 0, 1, 1, mEnvironment);
+        //mAgents.add(agent);
+        //mEnvironment.setAgent(2, 0, agent);
+
+        Agent agent = new Agent(2, 2, 1, 0, mEnvironment, Color.BLUE);
+        mAgents.add(agent);
+        mEnvironment.setAgent(2, 2, agent);
+
+        agent = new Agent(2, 2, -1, 0, mEnvironment, Color.RED);
+        mAgents.add(agent);
+        mEnvironment.setAgent(2, 2, agent);
+
+        //agent = new Agent(2, 4, 1, 1, mEnvironment);
+        //mAgents.add(agent);
+        //mEnvironment.setAgent(2, 4, agent);
+
+        /*agent = new Agent(5, 5, 1, 0, mEnvironment);
+        mAgents.add(agent);
+        mEnvironment.setAgent(5, 5, agent);
+
+        agent = new Agent(9, 9, 0, 1, mEnvironment);
+        mAgents.add(agent);
+        mEnvironment.setAgent(9, 9, agent);*/
 	}
 
 

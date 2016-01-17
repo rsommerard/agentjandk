@@ -17,11 +17,7 @@ public class GraphicView extends JFrame implements View {
         setTitle("Particule chamber");
 
         mGridEnable = gridEnable;
-        /*if (mGridEnable) {
-            setSize((width * agentSize) + (width + 1), (height * agentSize) + TOP_OFFSET + (height + 1));
-        } else {
-            setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
-        }*/
+
         setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
 
         setVisible(true);
@@ -30,22 +26,6 @@ public class GraphicView extends JFrame implements View {
 
     public void paint(Graphics graphics) {
         super.paint(graphics);
-
-        //graphics.setColor(Color.RED);
-        //graphics.fillRect(0, 299 + TOP_OFFSET, 1, 1);
-        //graphics.fillRect(299, 0 + TOP_OFFSET, 1, 1);
-
-        // left
-        /*graphics.fillRect(0, 0 + TOP_OFFSET, 1, 299);
-        // right
-        graphics.fillRect(299, 0 + TOP_OFFSET, 1, 299);
-
-
-        graphics.setColor(Color.RED);
-        // top
-        graphics.fillRect(0, 0 + TOP_OFFSET, 299, 1);
-        // bottom
-        graphics.fillRect(0, 299 + TOP_OFFSET, 299, 1);*/
 
         Environment environment = mMas.getEnvironment();
         int width = environment.getWidth();
@@ -67,7 +47,8 @@ public class GraphicView extends JFrame implements View {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (environment.isBusy(j, i)) {
-                    graphics.setColor(Color.RED);
+                    Agent agent = environment.getAgent(j, i);
+                    graphics.setColor(agent.getColor());
                     System.out.println("print: [x: " + (j * agentSize) + ", y: " + (i * agentSize) + "]");
                     graphics.fillRect(j * agentSize, (i * agentSize) + TOP_OFFSET, agentSize, agentSize);
                 }
