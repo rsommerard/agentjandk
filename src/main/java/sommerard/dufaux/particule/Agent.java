@@ -2,85 +2,43 @@ package sommerard.dufaux.particule;
 
 public class Agent {
 	
-	private int posX;
-	private int posY;
-	private Direction dir;
-	//private int speed;
-	private Environment env;
+	private int mPosX;
+	private int mPosY;
+    private int mStepX;
+    private int mStepY;
+	private Environment mEnvironment;
 	
-	
-	public Agent(int posX,int posY,Direction dir,Environment env){
-		this.posX = posX;
-		this.posY = posY;
-		this.dir = dir;
-		this.env = env;
+	public Agent(int posX, int posY, int stepX, int stepY, Environment environment) {
+        System.out.println("Agent: [posX: " + posX + ", posY: " + posY + ", stepX: " + stepX + ", stepY: " + stepY + "]");
+
+        mPosX = posX;
+		mPosY = posY;
+        mStepX = stepX;
+        mStepY = stepY;
+        mEnvironment = environment;
 	}
 	
 	public void doIt(){
-		int nextX = posX+ dir.x;
-		int nextY = posY+ dir.y;
+		int nextX = mPosX + mStepX;
+		int nextY = mPosY + mStepY;
 
-		//System.out.println("DEBUT agent "+this+" posX = "+posX+" et posY = "+posY);
-		//on delegue la gestion de "collision" à l'env. on pourrait le faire ici...
-		if(env.isBusy(nextX, nextY)){
-			//on inverse la direction;
-			dir.x = dir.x * -1;
-			dir.y = dir.y * -1;
+		if (mEnvironment.isBusy(nextX, nextY)) {
+			mStepX = mStepX * (-1);
+			mStepY = mStepY * (-1);
 
-			nextX = posX+ dir.x;
-			nextY = posY+ dir.y;
-			if(env.isBusy(nextX, nextY)){
-				//on ne bouge pas
-				nextX = posX;
-				nextY = posY;
+			nextX = mPosX + mStepX;
+			nextY = mPosY + mStepY;
+
+			if (mEnvironment.isBusy(nextX, nextY)) {
+				// don't move
+				nextX = mPosX;
+				nextY = mPosY;
 			}
 		}
 
-		//System.out.println("FIN agent "+this+" posX = "+posX+" et posY = "+posY);
-		
-		env.space[posX][posY] = false;
-		posX = nextX;
-		posY = nextY;
-		env.space[posX][posY] = true;
-
+        mEnvironment.setState(mPosX, mPosY, false);
+		mPosX = nextX;
+		mPosY = nextY;
+        mEnvironment.setState(mPosX, mPosY, true);
 	}
-
-	
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public Direction getDir() {
-		return dir;
-	}
-
-	public void setDir(Direction dir) {
-		this.dir = dir;
-	}
-
-	/*public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}*/
-
-	public void setEnv(Environment env) {
-		this.env = env;
-	}
-	
-
 }
