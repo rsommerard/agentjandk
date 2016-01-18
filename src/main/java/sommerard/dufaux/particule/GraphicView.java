@@ -1,7 +1,5 @@
 package sommerard.dufaux.particule;
 
-import javafx.scene.shape.Line;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -10,6 +8,7 @@ public class GraphicView extends JFrame implements View {
 
     private MAS mMas;
     private boolean mGridEnable;
+    private int mAgentSize;
 
     private static final int TOP_OFFSET = 22;
 
@@ -17,6 +16,7 @@ public class GraphicView extends JFrame implements View {
         setTitle("Particule chamber");
 
         mGridEnable = gridEnable;
+        mAgentSize = agentSize;
 
         setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
 
@@ -30,7 +30,7 @@ public class GraphicView extends JFrame implements View {
         Environment environment = mMas.getEnvironment();
         int width = environment.getWidth();
         int height = environment.getHeight();
-        int agentSize = environment.getAgentSize();
+        int agentSize = mAgentSize;
 
         if (mGridEnable) {
             graphics.setColor(Color.BLACK);
@@ -46,9 +46,10 @@ public class GraphicView extends JFrame implements View {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (environment.isBusy(j, i)) {
+                if (environment.getAgent(j, i) != null) {
                     Agent agent = environment.getAgent(j, i);
-                    graphics.setColor(Color.RED);
+                	
+                    graphics.setColor(agent.getColor());
                     //System.out.println("print: [x: " + (j * agentSize) + ", y: " + (i * agentSize) + "]");
                     graphics.fillRect(j * agentSize, (i * agentSize) + TOP_OFFSET, agentSize, agentSize);
                 }
@@ -60,5 +61,6 @@ public class GraphicView extends JFrame implements View {
         //System.out.println("update");
         mMas = (MAS) arg;
         paint(getGraphics());
+        setVisible(true);
     }
 }

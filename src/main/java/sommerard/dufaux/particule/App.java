@@ -2,16 +2,18 @@ package sommerard.dufaux.particule;
 
 public class App {
 	
-	public static int nbTurn = 1000000;
-	public static int nbBall = 50;
-	public static int width = 50;
-    public static int height = 50;
-	public static int agentSize = 10;
-	public static int speed = 1000;
-	public static boolean grid = true;
-	public static boolean equity = false;
-	public static String seed = "123456";
-	public static boolean toric = false;
+	public static int nbTurn = 1000000; //SMA
+	public static int nbBall = 200; //SMA
+	public static int width = 4; //ENVIRONMEN
+    public static int height = 4; //ENVIRONMENT
+	public static int agentSize = 20; //VIEW
+	public static int speed = 4000;  //SMA
+	public static boolean grid = true; //VIEW
+	public static boolean equity = false; //SMA
+	//seed pour belle collision avec 3 ball 10x10:
+	//public static String seed = "1234";
+	public static String seed = "12345"; //SMA
+	public static boolean toric = false; //ENVIRONMENT
 	
 	
     public static void main( String[] args ) throws InterruptedException {
@@ -84,12 +86,11 @@ public class App {
     public static void initSMA() throws InterruptedException {
 		//TextualView textualView = new TextualView();
         //MAS MAS = new MAS(textualView);
-        GraphicView graphicView = new GraphicView(width, height, agentSize, true);
+        GraphicView graphicView = new GraphicView(width, height, agentSize, grid);
         MAS MAS = new MAS(graphicView);
     	
-    	MAS.init(nbTurn, nbBall, width, height, agentSize, speed, equity, seed, toric);
+    	MAS.init(nbTurn, nbBall, width, height, speed, equity, seed, toric);
     	MAS.run(nbTurn, speed);
-    	
     }
 
 

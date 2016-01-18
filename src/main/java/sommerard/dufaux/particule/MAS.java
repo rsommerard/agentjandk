@@ -21,9 +21,9 @@ public class MAS extends Observable {
         mAgents = new ArrayList<Agent>();
 	}
 
-	public void init(int nbTurn, int nbBall, int width, int height, int agentSize, int speed, boolean equity, String seed, boolean toric) {
+	public void init(int nbTurn, int nbBall, int width, int height, int speed, boolean equity, String seed, boolean toric) {
 
-		mEnvironment = new Environment(width, height, agentSize);
+		mEnvironment = new Environment(width, height, toric);
 		
 		this.equity = equity;
 		
@@ -59,7 +59,7 @@ public class MAS extends Observable {
 	}
 	
 	public void initAgents(int width, int height, int nbBall){
-		for(int i = 0; i < nbBall; i++){
+		/*for(int i = 0; i < nbBall; i++){
 			int posX = mRandom.nextInt(width - 1);
 			int posY = mRandom.nextInt(height - 1);
 			int stepX = mRandom.nextInt(2) - 1;
@@ -70,10 +70,10 @@ public class MAS extends Observable {
 				stepY = mRandom.nextInt(2) - 1;
 			}
 
-            Agent agent = new Agent(posX, posY, stepX, stepY, mEnvironment);
+            Agent agent = new Agent(posX, posY, stepX, stepY, Color.getColor(null, mRandom.nextInt()), mEnvironment);
 			mAgents.add(agent);
 			mEnvironment.setAgent(posX, posY, agent);
-		}
+		}*/
 
         // Corner bug test ---------
         //Agent agent = new Agent(0, 0, 1, 1, mEnvironment);
@@ -85,13 +85,13 @@ public class MAS extends Observable {
         //mEnvironment.setAgent(2, 0, agent);
 		// ---------------
 
-        /*Agent agent = new Agent("A", 2, 2, 1, 0, mEnvironment, Color.BLUE);
+       /*Agent agent = new Agent( 0, 1, 1, 1, Color.BLUE, mEnvironment);
         mAgents.add(agent);
-        mEnvironment.setAgent(2, 2, agent);
+        mEnvironment.setAgent(0, 1, agent);*/
 
-        agent = new Agent("B", 2, 2, -1, 0, mEnvironment, Color.RED);
+        Agent agent = new Agent( 1, 2, -1, 0, Color.RED, mEnvironment);
         mAgents.add(agent);
-        mEnvironment.setAgent(2, 2, agent);*/
+        mEnvironment.setAgent(1, 2, agent);
 
         //agent = new Agent(2, 4, 1, 1, mEnvironment);
         //mAgents.add(agent);
