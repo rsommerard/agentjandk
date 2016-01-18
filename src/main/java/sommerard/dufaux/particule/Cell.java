@@ -11,9 +11,8 @@ public class Cell {
 	public void setAgent(Agent a){
 		mAgent = a;
 	}
+
 	public Agent getAgent(){
 		return mAgent;
 	}
-
-
 }

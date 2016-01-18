@@ -23,7 +23,7 @@ public class MAS extends Observable {
 
 	public void init(int nbTurn, int nbBall, int width, int height, int speed, boolean equity, String seed, boolean toric) {
 
-		mEnvironment = new Environment(width, height, toric);
+		mEnvironment = new Environment(width, height);
 		
 		this.equity = equity;
 		
@@ -44,15 +44,15 @@ public class MAS extends Observable {
 		for (int i = 0; i < nbTurn; i++) {
             System.out.println("Turn: " + i);
 
+			setChanged();
+			notifyObservers(this);
+
             if (!equity) {
 				Collections.shuffle(mAgents, mRandom);
 			}
 			for (Agent agent : mAgents) {
                 agent.doIt();
 			}
-			
-			setChanged();
-			notifyObservers(this);
 			
 			Thread.sleep(speed);
 		}
@@ -76,34 +76,24 @@ public class MAS extends Observable {
 		}*/
 
         // Corner bug test ---------
-        //Agent agent = new Agent(0, 0, 1, 1, mEnvironment);
+        //Agent agent = new Agent(mEnvironment, 0, 0, 1, 1, Color.RED);
         //mAgents.add(agent);
         //mEnvironment.setAgent(0, 0, agent);
 
-        //agent = new Agent(2, 0, 1, 1, mEnvironment);
-        //mAgents.add(agent);
-        //mEnvironment.setAgent(2, 0, agent);
+        Agent agent = new Agent(mEnvironment, 2, 0, 1, 1, Color.BLUE);
+        mAgents.add(agent);
+        mEnvironment.setAgent(2, 0, agent);
 		// ---------------
 
-       /*Agent agent = new Agent( 0, 1, 1, 1, Color.BLUE, mEnvironment);
+		// Horizontal pattern -----
+        /*Agent agent = new Agent(mEnvironment, 1, 1, -1, 0, Color.RED);
         mAgents.add(agent);
-        mEnvironment.setAgent(0, 1, agent);*/
+        mEnvironment.setAgent(1, 1, agent);
 
-        Agent agent = new Agent( 1, 2, -1, 0, Color.RED, mEnvironment);
-        mAgents.add(agent);
-        mEnvironment.setAgent(1, 2, agent);
-
-        //agent = new Agent(2, 4, 1, 1, mEnvironment);
-        //mAgents.add(agent);
-        //mEnvironment.setAgent(2, 4, agent);
-
-        /*agent = new Agent(5, 5, 1, 0, mEnvironment);
-        mAgents.add(agent);
-        mEnvironment.setAgent(5, 5, agent);
-
-        agent = new Agent(9, 9, 0, 1, mEnvironment);
-        mAgents.add(agent);
-        mEnvironment.setAgent(9, 9, agent);*/
+		agent = new Agent(mEnvironment, 3, 1, 1, 0, Color.BLUE);
+		mAgents.add(agent);
+		mEnvironment.setAgent(3, 1, agent);*/
+		// ---------------
 	}
 
 

@@ -4,10 +4,10 @@ public class App {
 	
 	public static int nbTurn = 1000000; //SMA
 	public static int nbBall = 200; //SMA
-	public static int width = 4; //ENVIRONMEN
-    public static int height = 4; //ENVIRONMENT
-	public static int agentSize = 20; //VIEW
-	public static int speed = 4000;  //SMA
+	public static int width = 5; //ENVIRONMEN
+    public static int height = 5; //ENVIRONMENT
+	public static int agentSize = 50; //VIEW
+	public static int speed = 500;  //SMA
 	public static boolean grid = true; //VIEW
 	public static boolean equity = false; //SMA
 	//seed pour belle collision avec 3 ball 10x10:
@@ -16,7 +16,7 @@ public class App {
 	public static boolean toric = false; //ENVIRONMENT
 	
 	
-    public static void main( String[] args ) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
     	
     	/*Map<String,Option> parameters = new HashMap<String,Option>();
     	
@@ -86,8 +86,8 @@ public class App {
     public static void initSMA() throws InterruptedException {
 		//TextualView textualView = new TextualView();
         //MAS MAS = new MAS(textualView);
-        GraphicView graphicView = new GraphicView(width, height, agentSize, grid);
-        MAS MAS = new MAS(graphicView);
+        View view = new View(width, height, agentSize, grid);
+        MAS MAS = new MAS(view);
     	
     	MAS.init(nbTurn, nbBall, width, height, speed, equity, seed, toric);
     	MAS.run(nbTurn, speed);
