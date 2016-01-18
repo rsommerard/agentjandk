@@ -48,8 +48,8 @@ public class GraphicView extends JFrame implements View {
             for (int j = 0; j < width; j++) {
                 if (environment.isBusy(j, i)) {
                     Agent agent = environment.getAgent(j, i);
-                    graphics.setColor(agent.getColor());
-                    System.out.println("print: [x: " + (j * agentSize) + ", y: " + (i * agentSize) + "]");
+                    graphics.setColor(Color.RED);
+                    //System.out.println("print: [x: " + (j * agentSize) + ", y: " + (i * agentSize) + "]");
                     graphics.fillRect(j * agentSize, (i * agentSize) + TOP_OFFSET, agentSize, agentSize);
                 }
             }
@@ -57,7 +57,7 @@ public class GraphicView extends JFrame implements View {
     }
 
     public void update(Observable o, Object arg) {
-        System.out.println("update");
+        //System.out.println("update");
         mMas = (MAS) arg;
         paint(getGraphics());
     }

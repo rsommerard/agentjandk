@@ -59,7 +59,7 @@ public class MAS extends Observable {
 	}
 	
 	public void initAgents(int width, int height, int nbBall){
-		/*for(int i = 0; i < nbBall; i++){
+		for(int i = 0; i < nbBall; i++){
 			int posX = mRandom.nextInt(width - 1);
 			int posY = mRandom.nextInt(height - 1);
 			int stepX = mRandom.nextInt(2) - 1;
@@ -73,9 +73,9 @@ public class MAS extends Observable {
             Agent agent = new Agent(posX, posY, stepX, stepY, mEnvironment);
 			mAgents.add(agent);
 			mEnvironment.setAgent(posX, posY, agent);
-		}*/
+		}
 
-        // Corner bug test
+        // Corner bug test ---------
         //Agent agent = new Agent(0, 0, 1, 1, mEnvironment);
         //mAgents.add(agent);
         //mEnvironment.setAgent(0, 0, agent);
@@ -83,14 +83,15 @@ public class MAS extends Observable {
         //agent = new Agent(2, 0, 1, 1, mEnvironment);
         //mAgents.add(agent);
         //mEnvironment.setAgent(2, 0, agent);
+		// ---------------
 
-        Agent agent = new Agent(2, 2, 1, 0, mEnvironment, Color.BLUE);
+        /*Agent agent = new Agent("A", 2, 2, 1, 0, mEnvironment, Color.BLUE);
         mAgents.add(agent);
         mEnvironment.setAgent(2, 2, agent);
 
-        agent = new Agent(2, 2, -1, 0, mEnvironment, Color.RED);
+        agent = new Agent("B", 2, 2, -1, 0, mEnvironment, Color.RED);
         mAgents.add(agent);
-        mEnvironment.setAgent(2, 2, agent);
+        mEnvironment.setAgent(2, 2, agent);*/
 
         //agent = new Agent(2, 4, 1, 1, mEnvironment);
         //mAgents.add(agent);

@@ -4,17 +4,19 @@ import java.awt.*;
 
 public class Agent {
 
-    private Color mColor;
+    private String mName;
+    //private Color mColor;
 	private int mPosX;
 	private int mPosY;
     private int mDirX;
     private int mDirY;
 	private Environment mEnvironment;
 
-	public Agent(int posX, int posY, int stepX, int stepY, Environment environment, Color color) {
-        System.out.println("Agent: [posX: " + posX + ", posY: " + posY + ", stepX: " + stepX + ", stepY: " + stepY + "]");
-
-        mColor = color;
+	//public Agent(String name, int posX, int posY, int stepX, int stepY, Environment environment, Color color) {
+        //System.out.println("Agent: [name: " + name + ", posX: " + posX + ", posY: " + posY + ", stepX: " + stepX + ", stepY: " + stepY + "]");
+    public Agent(int posX, int posY, int stepX, int stepY, Environment environment) {
+        //mName = name;
+        //mColor = color;
         mPosX = posX;
 		mPosY = posY;
         setDirection(stepX, stepY);
@@ -24,6 +26,8 @@ public class Agent {
     public void setDirection(int stepX, int stepY) {
         mDirX = stepX;
         mDirY = stepY;
+
+        System.out.println(mName + " direction changed.");
     }
 	
 	public void doIt(){
@@ -61,7 +65,7 @@ public class Agent {
 
         if (mEnvironment.isBusy(nextX, nextY)) {
             Agent agent = mEnvironment.getAgent(nextX, nextY);
-            agent.setDirection(mDirX, mDirY);
+            agent.inverseDirection();
 
             mDirX = mDirX * (-1);
             mDirY = mDirY * (-1);
@@ -82,7 +86,12 @@ public class Agent {
         mEnvironment.setAgent(mPosX, mPosY, this);
 	}
 
-    public Color getColor() {
-        return mColor;
+    private void inverseDirection() {
+        mDirX *= -1;
+        mDirY *= -1;
     }
+
+    /*public Color getColor() {
+        return mColor;
+    }*/
 }

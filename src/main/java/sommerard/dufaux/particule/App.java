@@ -2,15 +2,15 @@ package sommerard.dufaux.particule;
 
 public class App {
 	
-	public static int nbTurn = 1000;
-	public static int nbBall = 3;
-	public static int width = 5;
-    public static int height = 5;
+	public static int nbTurn = 1000000;
+	public static int nbBall = 50;
+	public static int width = 50;
+    public static int height = 50;
 	public static int agentSize = 10;
-	public static int speed = 2000;
+	public static int speed = 1000;
 	public static boolean grid = true;
 	public static boolean equity = false;
-	public static String seed;
+	public static String seed = "123456";
 	public static boolean toric = false;
 	
 	
