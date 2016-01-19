@@ -23,7 +23,7 @@ public class View extends JFrame implements Observer {
         mGrid = grid;
         mAgentSize = agentSize;
 
-        setSize(mWidth * mAgentSize + 1, (mHeight * mAgentSize) + 1 + TOP_OFFSET);
+        setSize(mWidth * mAgentSize, mHeight * mAgentSize + TOP_OFFSET);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -41,6 +41,10 @@ public class View extends JFrame implements Observer {
     }
 
     private void paintAgents(Graphics graphics) {
+        if (mMas == null) {
+            return;
+        }
+
         Environment environment = mMas.getEnvironment();
 
         for (int y = 0; y < mHeight; y++) {
