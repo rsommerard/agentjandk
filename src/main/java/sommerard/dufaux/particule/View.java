@@ -8,27 +8,34 @@ import java.util.Observer;
 public class View extends JFrame implements Observer {
 
     private MAS mMas;
-    private boolean mGridEnable;
+    private boolean mGrid;
     private int mAgentSize;
+    private int mWidth;
+    private int mHeight;
 
     private static final int TOP_OFFSET = 22;
 
-    public View(int width, int height, int agentSize, boolean gridEnable) {
-        setTitle("Particule chamber");
+    public View(int width, int height, int agentSize, boolean grid) {
+        setTitle("MAS");
 
-        mGridEnable = gridEnable;
+        mWidth = width;
+        mHeight = height;
+        mGrid = grid;
         mAgentSize = agentSize;
 
-        setSize(width * agentSize, (height * agentSize) + TOP_OFFSET);
+        setSize(mWidth * mAgentSize + 1, (mHeight * mAgentSize) + 1 + TOP_OFFSET);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
     }
 
     public void paint(Graphics graphics) {
         super.paint(graphics);
 
-        paintGrid(graphics);
+        if (mGrid) {
+            paintGrid(graphics);
+        }
 
         paintAgents(graphics);
     }
@@ -36,40 +43,26 @@ public class View extends JFrame implements Observer {
     private void paintAgents(Graphics graphics) {
         Environment environment = mMas.getEnvironment();
 
-        int width = environment.getWidth();
-        int height = environment.getHeight();
-
-        int agentSize = mAgentSize;
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0; y < mHeight; y++) {
+            for (int x = 0; x < mWidth; x++) {
                 if (environment.getAgent(x, y) != null) {
                     Agent agent = environment.getAgent(x, y);
                     graphics.setColor(agent.getColor());
-                    graphics.fillRect(x * agentSize, (y * agentSize) + TOP_OFFSET, agentSize, agentSize);
+                    graphics.fillRect(x * mAgentSize, (y * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);
                 }
             }
         }
     }
 
     private void paintGrid(Graphics graphics) {
-        Environment environment = mMas.getEnvironment();
+        graphics.setColor(Color.BLACK);
 
-        int width = environment.getWidth();
-        int height = environment.getHeight();
+        for (int i = 0; i <= mHeight; i++) {
+            graphics.drawLine(0, (i * mAgentSize) + TOP_OFFSET, mWidth * mAgentSize, (i * mAgentSize) + TOP_OFFSET);
+        }
 
-        int agentSize = mAgentSize;
-
-        if (mGridEnable) {
-            graphics.setColor(Color.BLACK);
-
-            for (int i = 0; i <= height; i++) {
-                graphics.drawLine(0, (i * agentSize) + TOP_OFFSET, width * agentSize, (i * agentSize) + TOP_OFFSET);
-            }
-
-            for (int i = 0; i <= width; i++) {
-                graphics.drawLine((i * agentSize), TOP_OFFSET, i * agentSize, (height * agentSize) + TOP_OFFSET);
-            }
+        for (int i = 0; i <= mWidth; i++) {
+            graphics.drawLine((i * mAgentSize), TOP_OFFSET, i * mAgentSize, (mHeight * mAgentSize) + TOP_OFFSET);
         }
     }
 

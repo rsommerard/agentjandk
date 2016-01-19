@@ -23,18 +23,6 @@ public class Agent {
 	public void doIt(){
 		Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
-        // DEBUD printer
-//        for (int y = 0; y <= 2; y++) {
-//            for (int x = 0; x <= 2; x++) {
-//                if (neighbors[y][x] == null) {
-//                    System.out.print("null ");
-//                } else {
-//                    System.out.print((neighbors[y][x].getAgent() != null) + " ");
-//                }
-//            }
-//            System.out.println();
-//        }
-
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
 
         if (nextCell == null) {
@@ -56,7 +44,6 @@ public class Agent {
     }
 
     private void changeDir(Cell[][] neighbors) {
-
         // Corner
         if ((neighbors[1][0] == null && neighbors[0][1] == null) ||
                 (neighbors[0][1] == null && neighbors[1][2] == null) ||
@@ -112,8 +99,6 @@ public class Agent {
             } else {
                 mDirX *= -1;
             }
-
-            return;
         }
     }
 

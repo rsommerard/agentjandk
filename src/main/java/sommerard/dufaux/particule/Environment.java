@@ -2,11 +2,13 @@ package sommerard.dufaux.particule;
 
 public class Environment {
 
-    private int mWidth; //X
+	private boolean mToric;
+	private int mWidth; //X
 	private int mHeight; //Y
 	private Cell[][] mCells; //[Y][X]
 
-	public Environment(int width, int height) {
+	public Environment(int width, int height, boolean toric) {
+		mToric = toric;
 		mWidth = width;
 		mHeight = height;
 		mCells = new Cell[height][width];
@@ -30,11 +32,19 @@ public class Environment {
 	        	int neighborX = posX + x;
 	        	int neighborY = posY + y;
 
-	        	if (neighborX < 0 || neighborX > mWidth - 1 || neighborY < 0 || neighborY > mHeight - 1 ) { // Border
+				if (mToric) {
+					neighborX = Math.floorMod(neighborX, mWidth);
+					neighborY = Math.floorMod(neighborY, mHeight);
+					neighbors[y + 1][x + 1] = mCells[neighborY][neighborX];
+					continue;
+				}
+
+				if (neighborX < 0 || neighborX > mWidth - 1 || neighborY < 0 || neighborY > mHeight - 1 ) { // Border
 					neighbors[y + 1][x + 1] = null;
-	        	} else {
-	        		neighbors[y + 1][x + 1] = mCells[neighborY][neighborX];
-	        	}
+					continue;
+				}
+
+				neighbors[y + 1][x + 1] = mCells[neighborY][neighborX];
 	        }
 	    }
 

@@ -13,55 +13,64 @@ public class MAS extends Observable {
 	private List<Agent> mAgents;
 	private Random mRandom;
 
-	private boolean equity;
-	
+	private boolean mEquity;
+	private int mSpeed;
+	private int mNbTurn;
+	private int mNbAgent;
+	private int mWidth;
+	private int mHeight;
+	private boolean mToric;
+	private long mSeed;
+
 	public MAS(View view){
         addObserver(view);
-
         mAgents = new ArrayList<Agent>();
 	}
 
-	public void init(int nbTurn, int nbBall, int width, int height, int speed, boolean equity, String seed, boolean toric) {
+	public void init(int nbTurn, int nbAgent, int width, int height, int speed, boolean equity, String seed, boolean toric) {
+		mSpeed = speed;
+		mNbTurn = nbTurn;
+		mNbAgent = nbAgent;
+		mWidth = width;
+		mHeight = height;
+		mToric = toric;
+		mSeed = (seed != null) ? Long.parseLong(seed) : null;
 
-		mEnvironment = new Environment(width, height);
+		mEnvironment = new Environment(mWidth, mHeight, mToric);
+		mEquity = equity;
+
 		
-		this.equity = equity;
+		mRandom = (seed != null) ? new Random(mSeed) : new Random();
 		
-		if(seed != null){
-            mRandom = new Random(Long.parseLong(seed));
-		}else{
-            mRandom = new Random();
-		}
-		
-		initAgents(width, height, nbBall);
+		initAgents();
 		
 		setChanged();
 		notifyObservers(this);
 	}
 	
-	public void run(int nbTurn, int speed) throws InterruptedException {
-		
-		for (int i = 0; i < nbTurn; i++) {
+	public void run() throws InterruptedException {
+		for (int i = 0; i < mNbTurn; i++) {
             System.out.println("Turn: " + i);
 
 			setChanged();
 			notifyObservers(this);
 
-            if (!equity) {
+            if (mEquity) {
 				Collections.shuffle(mAgents, mRandom);
 			}
+
 			for (Agent agent : mAgents) {
                 agent.doIt();
 			}
 			
-			Thread.sleep(speed);
+			Thread.sleep(mSpeed);
 		}
 	}
 	
-	public void initAgents(int width, int height, int nbBall){
-		for(int i = 0; i < nbBall; i++){
-			int posX = mRandom.nextInt(width - 1);
-			int posY = mRandom.nextInt(height - 1);
+	public void initAgents(){
+		for(int i = 0; i < mNbAgent; i++){
+			int posX = mRandom.nextInt(mWidth - 1);
+			int posY = mRandom.nextInt(mHeight - 1);
 			int stepX = mRandom.nextInt(2) - 1;
 			int stepY = mRandom.nextInt(2) - 1;
 
@@ -74,28 +83,7 @@ public class MAS extends Observable {
 			mAgents.add(agent);
 			mEnvironment.setAgent(posX, posY, agent);
 		}
-
-        // Corner bug test ---------
-//        Agent agent = new Agent(mEnvironment, 0, 0, 1, 1, Color.RED);
-//        mAgents.add(agent);
-//        mEnvironment.setAgent(0, 0, agent);
-//
-//        agent = new Agent(mEnvironment, 2, 0, 1, 1, Color.BLUE);
-//        mAgents.add(agent);
-//        mEnvironment.setAgent(2, 0, agent);
-		// ---------------
-
-		// Horizontal pattern -----
-//        Agent agent = new Agent(mEnvironment, 1, 1, -1, 0, Color.RED);
-//        mAgents.add(agent);
-//        mEnvironment.setAgent(1, 1, agent);
-//
-//		agent = new Agent(mEnvironment, 3, 1, 1, 0, Color.BLUE);
-//		mAgents.add(agent);
-//		mEnvironment.setAgent(3, 1, agent);
-		// ---------------
 	}
-
 
 	public Environment getEnvironment() {
 		return mEnvironment;
