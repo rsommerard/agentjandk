@@ -59,7 +59,7 @@ public class MAS extends Observable {
 	}
 	
 	public void initAgents(int width, int height, int nbBall){
-		/*for(int i = 0; i < nbBall; i++){
+		for(int i = 0; i < nbBall; i++){
 			int posX = mRandom.nextInt(width - 1);
 			int posY = mRandom.nextInt(height - 1);
 			int stepX = mRandom.nextInt(2) - 1;
@@ -70,29 +70,29 @@ public class MAS extends Observable {
 				stepY = mRandom.nextInt(2) - 1;
 			}
 
-            Agent agent = new Agent(posX, posY, stepX, stepY, Color.getColor(null, mRandom.nextInt()), mEnvironment);
+            Agent agent = new Agent(mEnvironment, posX, posY, stepX, stepY, Color.getColor(null, mRandom.nextInt()));
 			mAgents.add(agent);
 			mEnvironment.setAgent(posX, posY, agent);
-		}*/
+		}
 
         // Corner bug test ---------
-        //Agent agent = new Agent(mEnvironment, 0, 0, 1, 1, Color.RED);
-        //mAgents.add(agent);
-        //mEnvironment.setAgent(0, 0, agent);
-
-        Agent agent = new Agent(mEnvironment, 2, 0, 1, 1, Color.BLUE);
-        mAgents.add(agent);
-        mEnvironment.setAgent(2, 0, agent);
+//        Agent agent = new Agent(mEnvironment, 0, 0, 1, 1, Color.RED);
+//        mAgents.add(agent);
+//        mEnvironment.setAgent(0, 0, agent);
+//
+//        agent = new Agent(mEnvironment, 2, 0, 1, 1, Color.BLUE);
+//        mAgents.add(agent);
+//        mEnvironment.setAgent(2, 0, agent);
 		// ---------------
 
 		// Horizontal pattern -----
-        /*Agent agent = new Agent(mEnvironment, 1, 1, -1, 0, Color.RED);
-        mAgents.add(agent);
-        mEnvironment.setAgent(1, 1, agent);
-
-		agent = new Agent(mEnvironment, 3, 1, 1, 0, Color.BLUE);
-		mAgents.add(agent);
-		mEnvironment.setAgent(3, 1, agent);*/
+//        Agent agent = new Agent(mEnvironment, 1, 1, -1, 0, Color.RED);
+//        mAgents.add(agent);
+//        mEnvironment.setAgent(1, 1, agent);
+//
+//		agent = new Agent(mEnvironment, 3, 1, 1, 0, Color.BLUE);
+//		mAgents.add(agent);
+//		mEnvironment.setAgent(3, 1, agent);
 		// ---------------
 	}
 

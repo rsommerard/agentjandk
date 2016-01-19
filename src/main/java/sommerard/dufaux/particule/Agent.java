@@ -24,22 +24,21 @@ public class Agent {
 		Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
         // DEBUD printer
-        for (int y = 0; y <= 2; y++) {
-            for (int x = 0; x <= 2; x++) {
-                if (neighbors[y][x] == null) {
-                    System.out.print("null ");
-                } else {
-                    System.out.print((neighbors[y][x].getAgent() != null) + " ");
-                }
-            }
-            System.out.println();
-        }
+//        for (int y = 0; y <= 2; y++) {
+//            for (int x = 0; x <= 2; x++) {
+//                if (neighbors[y][x] == null) {
+//                    System.out.print("null ");
+//                } else {
+//                    System.out.print((neighbors[y][x].getAgent() != null) + " ");
+//                }
+//            }
+//            System.out.println();
+//        }
 
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
 
         if (nextCell == null) {
-            changeDir();
-            // TODO: move or stay after inverse ?
+            changeDir(neighbors);
         } else {
             if (nextCell.getAgent() == null) {
                 moveAgent(mPosX + mDirX, mPosY + mDirY);
@@ -47,59 +46,6 @@ public class Agent {
                 inverseDir();
             }
         }
-
-		
-		
-        /*int rightLimit = mEnvironment.getWidth() - 1;
-        int leftLimit = 0;
-        int topLimit = 0;
-        int bottomLimit = mEnvironment.getHeight() - 1;
-
-        int nextX = mPosX + mDirX;
-        int nextY = mPosY + mDirY;
-
-        // Resolve corner bug
-        if (mEnvironment.isCorner(mPosX, mPosY) && mEnvironment.isBusy(nextX, nextY)) {
-            mDirX = mDirX * (-1);
-            mDirY = mDirY * (-1);
-            nextX = mPosX + mDirX;
-            nextY = mPosY + mDirY;
-        }
-
-        // border
-        if (mEnvironment.isBusy(nextX, nextY)) {
-            if (nextX > rightLimit) {
-                mDirX = mDirX * (-1);
-            } else if (nextX < leftLimit) {
-                mDirX = mDirX * (-1);
-            } else if (nextY > bottomLimit) {
-                mDirY = mDirY * (-1);
-            } else if (nextY < topLimit) {
-                mDirY = mDirY * (-1);
-            }
-
-            nextX = mPosX + mDirX;
-            nextY = mPosY + mDirY;
-        }
-
-        if (mEnvironment.isBusy(nextX, nextY)) {
-            Agent agent = mEnvironment.getAgent(nextX, nextY);
-            agent.inverseDirection();
-
-            mDirX = mDirX * (-1);
-            mDirY = mDirY * (-1);
-            nextX = mPosX + mDirX;
-            nextY = mPosY + mDirY;
-
-            if (mEnvironment.isBusy(nextX, nextY)) {
-                mDirX = mDirX * (-1);
-                mDirY = mDirY * (-1);
-                nextX = mPosX;
-                nextY = mPosY;
-            }
-        }
-
-        */
 	}
 
     private void moveAgent(int newPosX, int newPosY) {
@@ -109,29 +55,65 @@ public class Agent {
         mEnvironment.setAgent(mPosX, mPosY, this);
     }
 
-    private void changeDir() {
+    private void changeDir(Cell[][] neighbors) {
 
-        System.out.println(mDirX + 1);
-        System.out.println(mDirY + 1);
-
-        // TOP Border
-        if (mDirY + 1 == 0) {
-            mDirY *= -1;
+        // Corner
+        if ((neighbors[1][0] == null && neighbors[0][1] == null) ||
+                (neighbors[0][1] == null && neighbors[1][2] == null) ||
+                (neighbors[1][0] == null && neighbors[2][1] == null) ||
+                (neighbors[1][2] == null && neighbors[2][1] == null)) {
+            inverseDir();
+            return;
         }
 
-        // BOTTOM Border
-        if (mDirY + 1 == 2) {
-            mDirY *= -1;
-        }
-
-        // LEFT Border
-        if (mDirX + 1 == 0) {
+        if (mDirX != 0 && mDirY == 0) {
             mDirX *= -1;
+            return;
         }
 
-        // RIGHT Border
-        if (mDirX + 1 == 2) {
-            mDirX *= -1;
+        if (mDirX == 0 && mDirY != 0) {
+            mDirY *= -1;
+            return;
+        }
+
+        if (mDirX == -1 && mDirY == -1) {
+            if (neighbors[0][1] == null) {
+                mDirY *= -1;
+            } else {
+                mDirX *= -1;
+            }
+
+            return;
+        }
+
+        if (mDirX == -1 && mDirY == 1) {
+            if (neighbors[1][0] == null) {
+                mDirX *= -1;
+            } else {
+                mDirY *= -1;
+            }
+
+            return;
+        }
+
+        if (mDirX == 1 && mDirY == 1) {
+            if (neighbors[2][1] == null) {
+                mDirY *= -1;
+            } else {
+                mDirX *= -1;
+            }
+
+            return;
+        }
+
+        if (mDirX == 1 && mDirY == -1) {
+            if (neighbors[0][1] == null) {
+                mDirY *= -1;
+            } else {
+                mDirX *= -1;
+            }
+
+            return;
         }
     }
 

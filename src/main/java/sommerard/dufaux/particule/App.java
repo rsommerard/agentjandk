@@ -3,11 +3,11 @@ package sommerard.dufaux.particule;
 public class App {
 	
 	public static int nbTurn = 1000000; //SMA
-	public static int nbBall = 200; //SMA
-	public static int width = 5; //ENVIRONMEN
-    public static int height = 5; //ENVIRONMENT
-	public static int agentSize = 50; //VIEW
-	public static int speed = 500;  //SMA
+	public static int nbBall = 50; //SMA
+	public static int width = 50; //ENVIRONMEN
+    public static int height = 50; //ENVIRONMENT
+	public static int agentSize = 10; //VIEW
+	public static int speed = 200;  //SMA
 	public static boolean grid = true; //VIEW
 	public static boolean equity = false; //SMA
 	//seed pour belle collision avec 3 ball 10x10:
