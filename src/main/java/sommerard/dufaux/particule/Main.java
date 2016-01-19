@@ -1,14 +1,14 @@
 package sommerard.dufaux.particule;
 
-public class App {
+public class Main {
 	
 	public static int nbTurn = 1000000; //SMA
-	public static int nbBall = 50; //SMA
-	public static int width = 50; //ENVIRONMEN
-    public static int height = 50; //ENVIRONMENT
-	public static int agentSize = 10; //VIEW
-	public static int speed = 200;  //SMA
-	public static boolean grid = true; //VIEW
+	public static int nbBall = 1000; //SMA
+	public static int width = 100; //ENVIRONMEN
+    public static int height = 100; //ENVIRONMENT
+	public static int agentSize = 8; //VIEW
+	public static int speed = 50;  //SMA
+	public static boolean grid = false; //VIEW
 	public static boolean equity = false; //SMA
 	//seed pour belle collision avec 3 ball 10x10:
 	//public static String seed = "1234";

@@ -41,18 +41,18 @@ public class Agent {
             changeDir(neighbors);
         } else {
             if (nextCell.getAgent() == null) {
-                moveAgent(mPosX + mDirX, mPosY + mDirY);
+                moveAgent(neighbors);
             } else {
                 inverseDir();
             }
         }
 	}
 
-    private void moveAgent(int newPosX, int newPosY) {
-        mEnvironment.setAgent(mPosX, mPosY, null);
-        mPosX = newPosX;
-        mPosY = newPosY;
-        mEnvironment.setAgent(mPosX, mPosY, this);
+    private void moveAgent(Cell[][] neighbors) {
+        neighbors[1][1].setAgent(null);
+        neighbors[mDirY + 1][mDirX + 1].setAgent(this);
+        mPosX = mPosX + mDirX;
+        mPosY = mPosY + mDirY;
     }
 
     private void changeDir(Cell[][] neighbors) {
