@@ -11,7 +11,7 @@ public class Main {
 	public static final int AGENT_SIZE = 10;
 	public static final int SPEED = 100;
 	public static final long SEED = 0;
-	public static final boolean GRID = true;
+	public static final boolean GRID = false;
 	public static final boolean EQUITY = false;
 	public static final boolean TORIC = false;
 	
@@ -24,7 +24,7 @@ public class Main {
 		options.addOption("height", true, "environment height");
 		options.addOption("agentSize", true, "agent size");
 		options.addOption("speed", true, "speed by turn (ms)");
-		options.addOption("seed", true, "generation seed");
+		options.addOption("seed", true, "generation seed (long)");
 		options.addOption("grid", "enable grid");
 		options.addOption("equity", "enable equity");
 		options.addOption("toric", "enable toric environment");
@@ -92,20 +92,20 @@ public class Main {
 
 		boolean grid = GRID;
 
-		if (cmd.getOptionValue("grid") != null) {
-			grid = Boolean.parseBoolean(cmd.getOptionValue("grid"));
+		if (cmd.hasOption("grid")) {
+			grid = true;
 		}
 
 		boolean equity = EQUITY;
 
-		if (cmd.getOptionValue("equity") != null) {
-			equity = Boolean.parseBoolean(cmd.getOptionValue("equity"));
+		if (cmd.hasOption("equity")) {
+			equity = true;
 		}
 
 		boolean toric = TORIC;
 
-		if (cmd.getOptionValue("toric") != null) {
-			toric = Boolean.parseBoolean(cmd.getOptionValue("toric"));
+		if (cmd.hasOption("toric")) {
+			toric = true;
 		}
 
 		View view = new View(width, height, agentSize, grid);
