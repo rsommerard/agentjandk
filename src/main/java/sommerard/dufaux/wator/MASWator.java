@@ -44,7 +44,7 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Fish(mEnvironment, posX, posY, Color.PINK);
+            Agent agent = new Fish(mEnvironment, posX, posY, Color.PINK, mRandom);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
@@ -61,7 +61,7 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Shark(mEnvironment, posX, posY, Color.BLUE);
+            Agent agent = new Shark(mEnvironment, posX, posY, Color.BLUE, mRandom);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 

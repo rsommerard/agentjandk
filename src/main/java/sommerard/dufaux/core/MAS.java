@@ -47,6 +47,7 @@ public abstract class MAS extends Observable {
 	
 	public void run() throws InterruptedException {
 		for (int i = 0; i < mNbTurn; i++) {
+			System.out.println("TURN "+i);
 			setChanged();
 			notifyObservers(this);
 
