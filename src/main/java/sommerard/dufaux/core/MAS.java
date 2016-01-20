@@ -68,4 +68,7 @@ public abstract class MAS extends Observable {
 		return mEnvironment;
 	}
 
+	public List<Agent> getAgents() {
+		return mAgents;
+	}
 }

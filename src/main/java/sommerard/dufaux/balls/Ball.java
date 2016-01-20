@@ -8,8 +8,13 @@ import java.awt.*;
 
 public class Ball extends Agent {
 
+    private int mDirX;
+    private int mDirY;
+
     public Ball(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
-        super(environment, posX, posY, dirX, dirY, color);
+        super(environment, posX, posY, color);
+        mDirX = posX;
+        mDirY = posY;
     }
 
     public void doIt() {

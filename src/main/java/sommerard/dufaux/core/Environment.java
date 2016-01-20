@@ -1,5 +1,7 @@
 package sommerard.dufaux.core;
 
+import java.util.List;
+
 public class Environment {
 
 	private boolean mToric;

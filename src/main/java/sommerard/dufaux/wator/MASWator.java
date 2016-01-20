@@ -1,6 +1,5 @@
 package sommerard.dufaux.wator;
 
-import sommerard.dufaux.balls.Ball;
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.MAS;
 import sommerard.dufaux.core.Position;
@@ -44,15 +43,8 @@ public class MASWator extends MAS {
 
             int posX = position.getX();
             int posY = position.getY();
-            int stepX = mRandom.nextInt(2) - 1;
-            int stepY = mRandom.nextInt(2) - 1;
 
-            while(stepX == 0 && stepY == 0) {
-                stepX = mRandom.nextInt(2) - 1;
-                stepY = mRandom.nextInt(2) - 1;
-            }
-
-            Agent agent = new Fish(mEnvironment, posX, posY, stepX, stepY, Color.PINK);
+            Agent agent = new Fish(mEnvironment, posX, posY, Color.PINK);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
@@ -68,15 +60,8 @@ public class MASWator extends MAS {
 
             int posX = position.getX();
             int posY = position.getY();
-            int stepX = mRandom.nextInt(2) - 1;
-            int stepY = mRandom.nextInt(2) - 1;
 
-            while(stepX == 0 && stepY == 0) {
-                stepX = mRandom.nextInt(2) - 1;
-                stepY = mRandom.nextInt(2) - 1;
-            }
-
-            Agent agent = new Shark(mEnvironment, posX, posY, stepX, stepY, Color.BLUE);
+            Agent agent = new Shark(mEnvironment, posX, posY, Color.BLUE);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 

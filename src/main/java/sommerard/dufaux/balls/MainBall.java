@@ -5,12 +5,12 @@ import sommerard.dufaux.core.View;
 
 public class MainBall {
 
-    public static final int NB_AGENT = 1000;
+    public static final int NB_AGENT = 2000;
     public static final int NB_TURN = 1000000;
-    public static final int WIDTH = 100;
-    public static final int HEIGHT = 100;
-    public static final int AGENT_SIZE = 2;
-    public static final int SPEED = 100;
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 500;
+    public static final int AGENT_SIZE = 5;
+    public static final int SPEED = 50;
     public static final long SEED = 0;
     public static final boolean GRID = false;
     public static final boolean EQUITY = false;

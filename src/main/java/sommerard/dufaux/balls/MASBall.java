@@ -41,15 +41,15 @@ public class MASBall extends MAS {
 
             int posX = position.getX();
             int posY = position.getY();
-            int stepX = mRandom.nextInt(2) - 1;
-            int stepY = mRandom.nextInt(2) - 1;
+            int dirX = mRandom.nextInt(2) - 1;
+            int dirY = mRandom.nextInt(2) - 1;
 
-            while(stepX == 0 && stepY == 0) {
-                stepX = mRandom.nextInt(2) - 1;
-                stepY = mRandom.nextInt(2) - 1;
+            while(dirX == 0 && dirY == 0) {
+                dirX = mRandom.nextInt(2) - 1;
+                dirY = mRandom.nextInt(2) - 1;
             }
 
-            Agent agent = new Ball(mEnvironment, posX, posY, stepX, stepY, Color.getColor(null, mRandom.nextInt()));
+            Agent agent = new Ball(mEnvironment, posX, posY, dirX, dirY, Color.getColor(null, mRandom.nextInt()));
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 

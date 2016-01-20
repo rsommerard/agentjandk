@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Shark extends Agent {
 
-    public Shark(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
-        super(environment, posX, posY, dirX, dirY, color);
+    public Shark(Environment environment, int posX, int posY, Color color) {
+        super(environment, posX, posY, color);
     }
 
     @Override

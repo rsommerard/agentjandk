@@ -7,8 +7,8 @@ import java.awt.*;
 
 public class Fish extends Agent {
 
-    public Fish(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
-        super(environment, posX, posY, dirX, dirY, color);
+    public Fish(Environment environment, int posX, int posY, Color color) {
+        super(environment, posX, posY, color);
     }
 
     @Override
