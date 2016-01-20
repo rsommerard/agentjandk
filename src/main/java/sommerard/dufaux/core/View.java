@@ -1,4 +1,4 @@
-package sommerard.dufaux.particule;
+package sommerard.dufaux.core;
 
 import javax.swing.*;
 import java.awt.*;

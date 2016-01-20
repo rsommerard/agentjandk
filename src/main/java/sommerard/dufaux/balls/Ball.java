@@ -1,27 +1,19 @@
-package sommerard.dufaux.particule;
+package sommerard.dufaux.balls;
 
-import java.awt.Color;
+import sommerard.dufaux.core.Agent;
+import sommerard.dufaux.core.Cell;
+import sommerard.dufaux.core.Environment;
 
-public class Agent {
+import java.awt.*;
 
-    private Color mColor;
-	private int mPosX;
-	private int mPosY;
-    private int mDirX;
-    private int mDirY;
-	private Environment mEnvironment;
+public class Ball extends Agent {
 
-    public Agent(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
-        mColor = color;
-        mPosX = posX;
-		mPosY = posY;
-		mDirX = dirX;
-		mDirY = dirY;
-        mEnvironment = environment;
-	}
+    public Ball(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
+        super(environment, posX, posY, dirX, dirY, color);
+    }
 
-	public void doIt(){
-		Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
+    public void doIt() {
+        Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
 
@@ -34,7 +26,7 @@ public class Agent {
                 inverseDir();
             }
         }
-	}
+    }
 
     private void moveAgent(Cell[][] neighbors) {
         neighbors[1][1].setAgent(null);
@@ -105,9 +97,5 @@ public class Agent {
     private void inverseDir() {
         mDirX *= -1;
         mDirY *= -1;
-    }
-
-    public Color getColor() {
-        return mColor;
     }
 }
