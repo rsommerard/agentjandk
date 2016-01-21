@@ -1,9 +1,9 @@
-package sommerard.dufaux.particule;
+package sommerard.dufaux.core;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
+import java.util.List;
 
 public class View extends JFrame implements Observer {
 
@@ -45,16 +45,11 @@ public class View extends JFrame implements Observer {
             return;
         }
 
-        Environment environment = mMas.getEnvironment();
+        List<Agent> agents = mMas.getAgents();
 
-        for (int y = 0; y < mHeight; y++) {
-            for (int x = 0; x < mWidth; x++) {
-                if (environment.getAgent(x, y) != null) {
-                    Agent agent = environment.getAgent(x, y);
-                    graphics.setColor(agent.getColor());
-                    graphics.fillRect(x * mAgentSize, (y * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);
-                }
-            }
+        for(Agent agent : agents) {
+            graphics.setColor(agent.getColor());
+            graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);
         }
     }
 

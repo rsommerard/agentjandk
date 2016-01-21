@@ -1,4 +1,4 @@
-package sommerard.dufaux.particule;
+package sommerard.dufaux;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

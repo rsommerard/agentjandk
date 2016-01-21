@@ -1,4 +1,6 @@
-package sommerard.dufaux.particule;
+package sommerard.dufaux.core;
+
+import java.util.List;
 
 public class Environment {
 
@@ -57,13 +59,5 @@ public class Environment {
 
     public Agent getAgent(int posX, int posY) {
         return mCells[posY][posX].getAgent();
-    }
-
-    public int getWidth() {
-        return mWidth;
-    }
-
-    public int getHeight() {
-        return mHeight;
     }
 }
