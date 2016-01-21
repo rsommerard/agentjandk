@@ -7,9 +7,9 @@ public class MainBall {
 
     public static final int NB_AGENT = 2000;
     public static final int NB_TURN = 1000000;
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
-    public static final int AGENT_SIZE = 5;
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = 200;
+    public static final int AGENT_SIZE = 4;
     public static final int SPEED = 50;
     public static final long SEED = 0;
     public static final boolean GRID = false;

@@ -13,13 +13,14 @@ public class Ball extends Agent {
 
     public Ball(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
         super(environment, posX, posY, color);
-        mDirX = posX;
-        mDirY = posY;
+        mDirX = dirX;
+        mDirY = dirY;
     }
 
     public void doIt() {
         Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
+        System.out.println(mDirY+" --- "+mDirX);
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
 
         if (nextCell == null) {

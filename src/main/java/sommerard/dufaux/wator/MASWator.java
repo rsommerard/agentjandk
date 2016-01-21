@@ -24,7 +24,7 @@ public class MASWator extends MAS {
 
     @Override
     public void initAgents() {
-        List<Position> positions = new ArrayList<Position>();
+        /*List<Position> positions = new ArrayList<Position>();
 
         for (int y = 0; y < mHeight; y++) {
             for (int x = 0; x < mWidth; x++) {
@@ -66,7 +66,15 @@ public class MASWator extends MAS {
             mEnvironment.setAgent(posX, posY, agent);
 
             positions.remove(0);
-        }
+        }*/
+    	
+    	Agent fish = new Fish(mEnvironment, 2, 2, Color.PINK, mRandom);
+    	mAgents.add(fish);
+    	mEnvironment.setAgent(2, 2, fish);
+    	
+    	Agent shark = new Shark(mEnvironment, 1, 1, Color.BLUE, mRandom);
+    	mAgents.add(shark);
+    	mEnvironment.setAgent(1, 1, shark);
     }
 
     public void init(int nbTurn, int nbShark, int nbFish, int fBreed, int sBreed, int starve, int width, int height, int speed, int agentSize, boolean equity, long seed, boolean toric) {
