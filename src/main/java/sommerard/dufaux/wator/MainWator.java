@@ -5,19 +5,21 @@ import sommerard.dufaux.core.View;
 
 public class MainWator {
 
-    public static final int NB_SHARK = 0;
-    public static final int NB_FISH = 1;
-    public static final int FISH_BREED = 5;
-    public static final int SHARK_BREED = 5;
-    public static final int STARVE = 5;
-    public static final int NB_TURN = 1000;
-    public static final int WIDTH = 10;
-    public static final int HEIGHT = 10;
-    public static final int AGENT_SIZE = 30;
-    public static final int SPEED = 500;
+	//super parametre = nb_shark = 150, nb_fish = 400, fish_breed = 4, shark_breed = 10,
+	// starve = 3, with = 50, height = 50, seed = 0, equity = true, toric = false.
+    public static final int NB_SHARK = 150;
+    public static final int NB_FISH = 400;
+    public static final int FISH_BREED = 4;
+    public static final int SHARK_BREED = 10;
+    public static final int STARVE = 3;
+    public static final int NB_TURN = 10000;
+    public static final int WIDTH = 50;
+    public static final int HEIGHT = 50;
+    public static final int AGENT_SIZE =  15;
+    public static final int SPEED = 50;
     public static final long SEED = 0;
     public static final boolean GRID = true;
-    public static final boolean EQUITY = false;
+    public static final boolean EQUITY = true;
     public static final boolean TORIC = false;
 
 

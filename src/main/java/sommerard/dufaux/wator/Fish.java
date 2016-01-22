@@ -3,54 +3,59 @@ package sommerard.dufaux.wator;
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.Cell;
 import sommerard.dufaux.core.Environment;
+import sommerard.dufaux.core.MAS;
+import sommerard.dufaux.core.Position;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class Fish extends Agent {
+public class Fish extends Animal {
 
-    private Random mRandom;
-
-	public Fish(Environment environment, int posX, int posY, Color color, Random random) {
-        super(environment, posX, posY, color);
-        mRandom = random;
+	private static int breed; //can't be final static because initialize at the execution
+	private final static ArrayList<Position> positions = new ArrayList<Position>(); //list of neighbors positions possible.
+	{
+		positions.add(new Position(0,0));
+		positions.add(new Position(0,1));
+		positions.add(new Position(0,2));
+		positions.add(new Position(1,0));
+		positions.add(new Position(1,2));
+		positions.add(new Position(2,0));
+		positions.add(new Position(2,1));
+		positions.add(new Position(2,2));
+	}
+	
+	public Fish(MASWator mas, Environment environment, int posX, int posY, Color color, Random random) {
+        super(mas, environment, posX, posY, color, random);
     }
 
     @Override
     public void doIt() {
+    	if(!mAlive)
+    		return;
+    	
+    	mBreed++;
+    	mAge++;
+    	//System.out.println(this);
+    	
         Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
-        
-        boolean fullNeighborhood = true;
-        boolean escape = false;
-        
-        
-        //Analyze local environment
-        for(int y = 0; y <= 2; y++){
-        	for(int x = 0; x <= 2; x++){
-        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() == null){
-        			fullNeighborhood = false;
-        		}
-        		
-        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Shark){
-        			escape = true;
-        		}
-        	}
+
+        if(isFullNeighborhood(neighbors)){
+        	return; //do not move
         }
         
-        //first comportment is escape
-        if(escape){
-        	moveToEscape(neighbors);
-        	return;
+        if(mBreed >= breed){
+        	breed(neighbors);
+        	mBreed = 0;
+        	return; //do not move
         }
-        //then reproduce
-        
-        //then random
-        if(!fullNeighborhood){
-        	moveRandom(neighbors);
-        }
+        moveRandom(neighbors);
+
 
     }
     
+    //NOT USED FOR THE MOMENT
+    /*
     private void moveToEscape(Cell[][] neighbors) {
     	int nextDirX = 0, nextDirY = 0;
     	analyzeEnvironment:
@@ -70,27 +75,22 @@ public class Fish extends Agent {
 
 		System.out.println("Move random dirX="+nextDirX+" and dirY ="+nextDirY+"]");
         moveAgent(neighbors,nextDirX,nextDirY);
-	}
+	}*/
     
-
-	private void moveRandom(Cell[][] neighbors){
-        int nextDirX = 0, nextDirY = 0;
-        do{
-        	nextDirX = mRandom.nextInt(3)-1;
-            nextDirY = mRandom.nextInt(3)-1;
-        }while((nextDirX == 0 && nextDirY ==0) || //don't be stuck in the middle with you. 
-        		(neighbors[nextDirY+1][nextDirX+1] == null || //border
-        		neighbors[nextDirY+1][nextDirX+1].getAgent() != null)); //agent in case
-
-		System.out.println("Move random dirX="+nextDirX+" and dirY ="+nextDirY+"]");
-        moveAgent(neighbors,nextDirX,nextDirY);
-        
+    private void breed(Cell[][] neighbors){
+		Position pos = randomEmptyCell(neighbors);
+        if(pos != null){
+        	Agent fish = this.mMas.createFish(mPosX+pos.getX()-1, mPosY+pos.getY()-1); //affect mas
+        	neighbors[pos.getY()][pos.getX()].setAgent(fish); //affect environment
+        }
     }
     
-    private void moveAgent(Cell[][] neighbors, int dirX, int dirY) {
-        neighbors[1][1].setAgent(null);
-        neighbors[dirY+1][dirX+1].setAgent(this);
-        mPosX = mPosX + dirX;
-        mPosY = mPosY + dirY;
+    @Override
+    public String toString(){
+    	return this.getClass().getName()+" "+Integer.toHexString(hashCode())+" ["+mPosY+"]["+mPosX+"] breed = "+mBreed+", age ="+mAge;
+    }
+    
+    public static void setGlobalBreed(int breed){
+    	Fish.breed = breed;
     }
 }

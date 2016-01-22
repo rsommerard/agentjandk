@@ -8,6 +8,7 @@ public class Environment {
 	private int mWidth; //X
 	private int mHeight; //Y
 	private Cell[][] mCells; //[Y][X]
+	//idée : faire une map <Position,Agent> 
 
 	public Environment(int width, int height, boolean toric) {
 		mToric = toric;

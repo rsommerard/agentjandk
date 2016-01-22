@@ -13,7 +13,8 @@ public class View extends JFrame implements Observer {
     private int mWidth;
     private int mHeight;
 
-    private static final int TOP_OFFSET = 22;
+    private static final int TOP_OFFSET = 34;
+    //private static final int TOP_OFFSET = 22;
 
     public View(int width, int height, int agentSize, boolean grid) {
         setTitle("MAS");

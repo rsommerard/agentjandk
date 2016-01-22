@@ -46,21 +46,26 @@ public abstract class MAS extends Observable {
 	}
 	
 	public void run() throws InterruptedException {
-		Thread.sleep(mSpeed);
+
 		for (int i = 0; i < mNbTurn; i++) {
-			System.out.println("TURN "+i);
 			setChanged();
 			notifyObservers(this);
+			Thread.sleep(mSpeed);
 
+			
+			//System.out.println("TURN "+i);
             if (mEquity) {
 				Collections.shuffle(mAgents, mRandom);
 			}
 
-			for (Agent agent : mAgents) {
+            
+            List<Agent> agentsBeforeRun = new ArrayList<Agent>();
+            agentsBeforeRun.addAll(mAgents);
+			for (Agent agent : agentsBeforeRun) {
+
                 agent.doIt();
 			}
 			
-			Thread.sleep(mSpeed);
 		}
 	}
 	
