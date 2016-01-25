@@ -18,6 +18,7 @@ public abstract class MAS extends Observable {
 	protected int mAgentSize;
 	protected boolean mToric;
 	protected long mSeed;
+	protected int mCurrentTurn;
 
 	public MAS(View view){
         addObserver(view);
@@ -35,7 +36,7 @@ public abstract class MAS extends Observable {
 
 		mEnvironment = new Environment(mWidth, mHeight, mToric);
 		mEquity = equity;
-
+		mCurrentTurn = 0;
 		
 		mRandom = new Random(mSeed);
 		
@@ -65,7 +66,9 @@ public abstract class MAS extends Observable {
 
                 agent.doIt();
 			}
-			
+			//System.out.println("nbAgent = "+mAgents.size()+" et "+mAgentSize);
+			//System.out.println("turn "+mCurrentTurn);
+			mCurrentTurn++;
 		}
 	}
 	
@@ -77,5 +80,9 @@ public abstract class MAS extends Observable {
 
 	public List<Agent> getAgents() {
 		return mAgents;
+	}
+	
+	public int getCurrentTurn() {
+		return mCurrentTurn;
 	}
 }

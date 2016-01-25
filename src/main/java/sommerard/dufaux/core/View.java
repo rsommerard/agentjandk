@@ -12,8 +12,10 @@ public class View extends JFrame implements Observer {
     private int mAgentSize;
     private int mWidth;
     private int mHeight;
-
-    private static final int TOP_OFFSET = 34;
+    private Canvas mCanvas;
+    
+    
+    private static final int TOP_OFFSET = 20;
     //private static final int TOP_OFFSET = 22;
 
     public View(int width, int height, int agentSize, boolean grid) {
@@ -24,14 +26,17 @@ public class View extends JFrame implements Observer {
         mGrid = grid;
         mAgentSize = agentSize;
 
-        setSize(mWidth * mAgentSize, mHeight * mAgentSize + TOP_OFFSET);
+        mCanvas = new Canvas(width, height, agentSize, grid);
+        this.setLayout(new BorderLayout());
+        this.add(mCanvas, BorderLayout.CENTER);
+        setSize(mWidth * mAgentSize + 2, mHeight * mAgentSize + TOP_OFFSET);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
     }
 
-    public void paint(Graphics graphics) {
+    /*public void paint(Graphics graphics) {
         super.paint(graphics);
 
         if (mGrid) {
@@ -64,11 +69,14 @@ public class View extends JFrame implements Observer {
         for (int i = 0; i <= mWidth; i++) {
             graphics.drawLine((i * mAgentSize), TOP_OFFSET, i * mAgentSize, (mHeight * mAgentSize) + TOP_OFFSET);
         }
-    }
+    }*/
 
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {    	
+    	//System.out.println("UPDATE VIEW");
         mMas = (MAS) arg;
-        paint(getGraphics());
-        setVisible(true);
-    }
+        mCanvas.setMas(mMas);
+        repaint();
+        //paint(getGraphics());
+		// setVisible(true);
+	}
 }

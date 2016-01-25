@@ -17,7 +17,7 @@ public class MASWator extends MAS {
     private int mFishBreed;
     private int mSharkBreed;
     private int mStarve;
-
+    
     public MASWator(View view) {
         super(view);
     }
@@ -45,7 +45,7 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Fish(this, mEnvironment, posX, posY, Color.PINK, mRandom);
+            Agent agent = new Fish(this, mEnvironment, posX, posY, Color.PINK, mRandom, true);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
@@ -62,7 +62,7 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Shark(this, mEnvironment, posX, posY, Color.BLUE, mRandom);
+            Agent agent = new Shark(this, mEnvironment, posX, posY, Color.BLUE, mRandom, true);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
@@ -116,20 +116,25 @@ public class MASWator extends MAS {
     
     
     public Agent createFish(int posX, int posY){
-    	Agent fish = new Fish(this, mEnvironment, posX, posY, Color.PINK, mRandom);
+    	int newPosX = Math.floorMod(posX, mWidth);
+    	int newPosY = Math.floorMod(posY, mHeight);
+    	Agent fish = new Fish(this, mEnvironment, newPosX, newPosY, Color.PINK, mRandom);
     	mAgents.add(fish);
     	mNbFish++;
-    	mEnvironment.setAgent(posX, posY, fish);
+    	mEnvironment.setAgent(newPosX, newPosY, fish);
     	return fish;
     }
 
 	public Agent createShark(int posX, int posY) {
-    	Agent shark = new Shark(this, mEnvironment, posX, posY, Color.BLUE, mRandom);
+    	int newPosX = Math.floorMod(posX, mWidth);
+    	int newPosY = Math.floorMod(posY, mHeight);
+    	Agent shark = new Shark(this, mEnvironment, newPosX, newPosY, Color.BLUE, mRandom);
     	mAgents.add(shark);
     	mNbShark++;
-    	mEnvironment.setAgent(posX, posY, shark);
+    	mEnvironment.setAgent(newPosX, newPosY, shark);
     	return shark;
-	}    
+	}
+	
     public boolean removeAgent(Agent agent){
     	if(agent instanceof Fish){
     		mNbFish--;
@@ -140,5 +145,11 @@ public class MASWator extends MAS {
     	return mAgents.remove(agent);
     }
 
+    public int getNbFish(){
+    	return mNbFish;
+    }
     
+    public int getNbShark(){
+    	return mNbShark;
+    }
 }

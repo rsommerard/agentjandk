@@ -17,10 +17,24 @@ public class Shark extends Animal {
 	private static int starve; //can't be final static because initialize at the execution
 
     private int mStarve;
-
+    
+	public Shark(MASWator mas, Environment environment, int posX, int posY, Color color, Random random, boolean randomState) {
+        super(mas, environment, posX, posY, color, random);
+        
+        if (randomState){
+        	mBreed = random.nextInt(breed);        
+        	mStarve = random.nextInt(starve-1)+2;
+        	return;
+        }
+        mStarve = 0;
+        mBreed = 0;
+    }
+	
+	
 	public Shark(MASWator mas, Environment environment, int posX, int posY, Color color, Random random) {
         super(mas, environment, posX, posY, color, random);
-        mStarve = starve;
+        mStarve = 0;
+        mBreed = 0;
     }
 
     @Override
@@ -28,49 +42,55 @@ public class Shark extends Animal {
     	if(!mAlive)
     		return;
     	
-    	mStarve--;
+    	mStarve++;
     	mBreed++;
     	mAge++;
     	//System.out.println(this);
     	Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
-    	if(mStarve <= 0){
+    	if(mStarve >= starve){
     		mAlive = false;
     		this.mMas.removeAgent(this); //affect mas
 			neighbors[1][1].setAgent(null); //affect environment
     		return;
     	}
     	
-    	try{
-    		eatFish(neighbors);
-    		//System.out.println("eat fish");
-    		//return;
-    	}catch(NoFishException e){
-    	};
+    	eatFish(neighbors);
     	
         if(mBreed >= breed){
         	//System.out.println("reproduce");
         	breed(neighbors);
-        	mBreed = this.breed;
-        	return; //do not move
+        	mBreed = 0;
+        	//return; //do not move
         }
         moveRandom(neighbors);
     	
     }
     
-    private void eatFish(Cell[][] neighbors) throws NoFishException{
+    private void eatFish(Cell[][] neighbors){
+    	ArrayList<Cell> fishs = new ArrayList<Cell>();
     	for(int y = 0; y <= 2; y++){
         	for(int x = 0; x <= 2; x++){
-        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish ){
-        			((Fish)neighbors[y][x].getAgent()).isKilled();
-        			this.mMas.removeAgent(neighbors[y][x].getAgent()); //affect mas
-        			neighbors[y][x].setAgent(null); //affect environment
-        			mStarve = starve;
-        			return;
+        		//not necessary because we remove the fish of the environment instantatly
+        		//if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish && ((Fish)neighbors[y][x].getAgent()).isAlive()){
+        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish){
+        			fishs.add(neighbors[y][x]);
         		}
         	}
         }
-    	throw new NoFishException();
+    	
+    	if(fishs.isEmpty()){
+    		return;
+    	}
+    	int random = mRandom.nextInt(fishs.size());
+    	Cell cellWithFish = fishs.get(random);
+    	
+		((Fish)cellWithFish.getAgent()).die();
+		this.mMas.removeAgent(cellWithFish.getAgent()); //affect mas
+		cellWithFish.setAgent(null); //affect environment
+		mStarve = 0;
+		return;
+    	
     }
     
     

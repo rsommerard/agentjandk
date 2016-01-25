@@ -1,5 +1,12 @@
 package sommerard.dufaux.wator;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Observable;
+
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
 
@@ -7,16 +14,16 @@ public class MainWator {
 
 	//super parametre = nb_shark = 150, nb_fish = 400, fish_breed = 4, shark_breed = 10,
 	// starve = 3, with = 50, height = 50, seed = 0, equity = true, toric = false.
-    public static final int NB_SHARK = 150;
-    public static final int NB_FISH = 400;
-    public static final int FISH_BREED = 4;
-    public static final int SHARK_BREED = 10;
-    public static final int STARVE = 3;
+    public static final int NB_SHARK = 200;
+    public static final int NB_FISH = 200;
+    public static final int FISH_BREED = 12;
+    public static final int SHARK_BREED = 9;
+    public static final int STARVE = 8;
     public static final int NB_TURN = 10000;
-    public static final int WIDTH = 50;
-    public static final int HEIGHT = 50;
-    public static final int AGENT_SIZE =  15;
-    public static final int SPEED = 50;
+    public static final int WIDTH = 160;
+    public static final int HEIGHT = 90;
+    public static final int AGENT_SIZE =  10;
+    public static final int SPEED = 20;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;
@@ -142,10 +149,52 @@ public class MainWator {
         if (cmd.hasOption("toric")) {
             toric = true;
         }
-
+        
+        
+        
+		/*Path path = Paths.get("output.csv");
+		BufferedWriter writer = null;
+		try {
+			writer = Files.newBufferedWriter(path);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			writer.write("Fish, Shark");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			writer.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+		
+		
+		
+		
+		
         View view = new View(width, height, agentSize, grid);
+        CsvView stats = null;
+		try {
+			stats = new CsvView();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         MASWator masWator = new MASWator(view);
+        masWator.addObserver(stats);
         masWator.init(nbTurn, nbShark, nbFish, fBreed, sBreed, starve, width, height, speed, agentSize, equity, seed, toric);
         masWator.run();
+        
+        try {
+			stats.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

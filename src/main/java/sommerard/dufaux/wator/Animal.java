@@ -34,7 +34,6 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
         mMas = mas;
         mRandom = random;
         //mBreed = mRandom.nextInt(breed);
-        mBreed = 0;
         mAge = 0;
         mAlive = true;
     }
@@ -44,6 +43,7 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
         for(int y = 0; y <= 2; y++){
         	for(int x = 0; x <= 2; x++){
         		if(neighbors[y][x] != null && neighbors[y][x].getAgent() == null){
+        			//System.out.println("full Neighborhoord ["+y+"]["+x+"]");
         			return false;
         		}
         	}
@@ -73,13 +73,15 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
     }
 	
     protected void moveAgent(Cell[][] neighbors, int posX, int posY) {
+    	//System.out.println("Move agent [1][1] to ["+posY+"]["+posX+"]");
         neighbors[1][1].setAgent(null);
         neighbors[posY][posX].setAgent(this);
-        mPosX = mPosX + posX -1 ; // -1 because transition local->global
-        mPosY = mPosY + posY -1 ;
+        mPosX = Math.floorMod((mPosX + posX -1), mEnvironment.getWidth()); // -1 because transition local->global
+        mPosY = Math.floorMod((mPosY + posY -1), mEnvironment.getHeight());
     }
     
-    public void isKilled(){
+    
+    public void die(){
     	this.mAlive = false;
     }
     

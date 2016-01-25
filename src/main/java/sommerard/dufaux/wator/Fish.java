@@ -25,8 +25,19 @@ public class Fish extends Animal {
 		positions.add(new Position(2,2));
 	}
 	
+	public Fish(MASWator mas, Environment environment, int posX, int posY, Color color, Random random, boolean randomState) {
+        super(mas, environment, posX, posY, color, random);
+        if (randomState){
+        	mBreed = random.nextInt(breed);
+        	return;
+        }
+        mBreed = 0;
+    }
+	
 	public Fish(MASWator mas, Environment environment, int posX, int posY, Color color, Random random) {
         super(mas, environment, posX, posY, color, random);
+        //mBreed = random.nextInt(breed);
+        mBreed = 0;
     }
 
     @Override
@@ -44,11 +55,13 @@ public class Fish extends Animal {
         	return; //do not move
         }
         
+        
         if(mBreed >= breed){
         	breed(neighbors);
         	mBreed = 0;
         	return; //do not move
         }
+        
         moveRandom(neighbors);
 
 
@@ -80,7 +93,7 @@ public class Fish extends Animal {
     private void breed(Cell[][] neighbors){
 		Position pos = randomEmptyCell(neighbors);
         if(pos != null){
-        	Agent fish = this.mMas.createFish(mPosX+pos.getX()-1, mPosY+pos.getY()-1); //affect mas
+        	Agent fish = this.mMas.createFish((mPosX+pos.getX()-1), (mPosY+pos.getY()-1)); //affect mas
         	neighbors[pos.getY()][pos.getX()].setAgent(fish); //affect environment
         }
     }
