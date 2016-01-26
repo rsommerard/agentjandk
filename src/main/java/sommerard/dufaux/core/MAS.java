@@ -63,11 +63,11 @@ public abstract class MAS extends Observable {
             List<Agent> agentsBeforeRun = new ArrayList<Agent>();
             agentsBeforeRun.addAll(mAgents);
 			for (Agent agent : agentsBeforeRun) {
-
                 agent.doIt();
 			}
-			//System.out.println("nbAgent = "+mAgents.size()+" et "+mAgentSize);
-			//System.out.println("turn "+mCurrentTurn);
+
+			System.out.println("turn "+mCurrentTurn);
+			System.out.println("nbAgent = "+mAgents.size());
 			mCurrentTurn++;
 		}
 	}

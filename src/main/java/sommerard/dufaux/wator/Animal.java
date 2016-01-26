@@ -52,7 +52,26 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
     }
     
 	protected Position randomEmptyCell(Cell[][] neighbors){
-    	//check if there is at least one empty cell
+		
+		ArrayList<Position> emptys = new ArrayList<Position>();
+    	for(int y = 0; y <= 2; y++){
+        	for(int x = 0; x <= 2; x++){
+        		//not necessary because we remove the fish of the environment instantatly
+        		//if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish && ((Fish)neighbors[y][x].getAgent()).isAlive()){
+        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() == null){
+        			emptys.add(new Position(x,y));
+        		}
+        	}
+        }
+    	
+    	if(emptys.isEmpty()){
+    		return null;
+    	}
+    	
+    	int random = mRandom.nextInt(emptys.size());
+    	return emptys.get(random);
+    	
+		/*//check if there is at least one empty cell
     	if(isFullNeighborhood(neighbors))
     		return null;
     	
@@ -62,7 +81,7 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
         }while((neighbors[newPos.getY()][newPos.getX()] == null || //border
         		neighbors[newPos.getY()][newPos.getX()].getAgent() != null)); //agent in case
 
-    	return newPos;
+    	return newPos;*/
     }
     
     protected void moveRandom(Cell[][] neighbors){
