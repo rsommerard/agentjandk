@@ -45,7 +45,7 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Fish(this, mEnvironment, posX, posY, Color.PINK, mRandom, true);
+            Agent agent = new Fish(this, mEnvironment, posX, posY, mRandom, true);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
@@ -62,22 +62,12 @@ public class MASWator extends MAS {
             int posX = position.getX();
             int posY = position.getY();
 
-            Agent agent = new Shark(this, mEnvironment, posX, posY, Color.BLACK, mRandom, true);
+            Agent agent = new Shark(this, mEnvironment, posX, posY, mRandom, true);
             mAgents.add(agent);
             mEnvironment.setAgent(posX, posY, agent);
 
             positions.remove(0);
         }
-    	
-
-    	/*Agent fish = new Fish(this, mEnvironment, 0, 0, Color.PINK, mRandom);
-    	mAgents.add(fish);
-    	mEnvironment.setAgent(0, 0, fish);
-    	
-    	Agent shark = new Shark(this, mEnvironment, 3, 3, Color.BLUE, mRandom);
-    	mAgents.add(shark);
-    	mEnvironment.setAgent(3, 3, shark);
-    	/**/
     }
 
     public void init(int nbTurn, int nbShark, int nbFish, int fBreed, int sBreed, int starve, int width, int height, int speed, int agentSize, boolean equity, long seed, boolean toric) {
@@ -118,20 +108,20 @@ public class MASWator extends MAS {
     public Agent createFish(int posX, int posY){
     	int newPosX = Math.floorMod(posX, mWidth);
     	int newPosY = Math.floorMod(posY, mHeight);
-    	Agent fish = new Fish(this, mEnvironment, newPosX, newPosY, Color.PINK, mRandom);
-    	addInTurn.add(fish);
+    	Agent fish = new Fish(this, mEnvironment, newPosX, newPosY, mRandom);
+    	mAgents.add(fish);
     	mNbFish++;
-    	//mEnvironment.setAgent(newPosX, newPosY, fish);
+    	mEnvironment.setAgent(newPosX, newPosY, fish);
     	return fish;
     }
 
 	public Agent createShark(int posX, int posY) {
     	int newPosX = Math.floorMod(posX, mWidth);
     	int newPosY = Math.floorMod(posY, mHeight);
-    	Agent shark = new Shark(this, mEnvironment, newPosX, newPosY, Color.BLACK, mRandom);
-    	addInTurn.add(shark);
+    	Agent shark = new Shark(this, mEnvironment, newPosX, newPosY, mRandom);
+    	mAgents.add(shark);
     	mNbShark++;
-    	//mEnvironment.setAgent(newPosX, newPosY, shark);
+    	mEnvironment.setAgent(newPosX, newPosY, shark);
     	return shark;
 	}
 	
@@ -142,7 +132,7 @@ public class MASWator extends MAS {
     	if(agent instanceof Shark){
     		mNbShark--;
     	}
-    	return removeInTurn.add(agent);
+    	return mAgents.remove(agent);
     }
 
     public int getNbFish(){

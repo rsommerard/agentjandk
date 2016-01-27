@@ -44,7 +44,6 @@ public class Canvas extends JPanel{
 
         //System.out.println("paint "+agents.size()+" agents");
         for(Agent agent : agents) {
-        	//System.out.println("### print "+agent);
             graphics.setColor(agent.getColor());
             graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize), mAgentSize, mAgentSize);
             //graphics.fillRoundRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);

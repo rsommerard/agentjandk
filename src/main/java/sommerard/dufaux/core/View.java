@@ -15,8 +15,8 @@ public class View extends JFrame implements Observer {
     private Canvas mCanvas;
     
     
-    private static final int TOP_OFFSET = 20;
-    //private static final int TOP_OFFSET = 22;
+    //private static final int TOP_OFFSET = 20;
+    private static final int TOP_OFFSET = 22;
 
     public View(int width, int height, int agentSize, boolean grid) {
         setTitle("MAS");
@@ -37,11 +37,10 @@ public class View extends JFrame implements Observer {
     }
 
     public void update(Observable o, Object arg) {    	
-    	//System.out.println("UPDATE VIEW");
+
         mMas = (MAS) arg;
         mCanvas.setMas(mMas);
         repaint();
-        //paint(getGraphics());
-		// setVisible(true);
+
 	}
 }

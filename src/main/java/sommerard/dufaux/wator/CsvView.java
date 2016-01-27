@@ -1,9 +1,6 @@
 package sommerard.dufaux.wator;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,8 +13,16 @@ public class CsvView implements Observer{
 	private BufferedWriter writer;
 	private PrintWriter out;
 	
-	public CsvView() throws IOException{
+	public CsvView() throws IOException {
 		System.out.println("create file writer");
+		File png = new File("stats.png");
+		if(png.exists())
+			png.delete();
+		File csv = new File("stats.csv");
+
+		if(csv.exists())
+			csv.delete();
+
 		out = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)));
 		out.println("fish, shark");
 	}

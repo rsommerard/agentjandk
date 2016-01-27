@@ -3,7 +3,6 @@ package sommerard.dufaux.wator;
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.Cell;
 import sommerard.dufaux.core.Environment;
-import sommerard.dufaux.core.MAS;
 import sommerard.dufaux.core.Position;
 
 import java.awt.*;
@@ -18,11 +17,11 @@ public class Shark extends Animal {
 
     private int mStarve;
     
-	public Shark(MASWator mas, Environment environment, int posX, int posY, Color color, Random random, boolean randomState) {
-        super(mas, environment, posX, posY, color, random);
+	public Shark(MASWator mas, Environment environment, int posX, int posY, Random random, boolean randomState) {
+        super(mas, environment, posX, posY, random);
         
         if (randomState){
-        	mBreed = random.nextInt(breed);        
+        	mBreed = random.nextInt(breed);
         	mStarve = random.nextInt(starve-1);
         	return;
         }
@@ -31,13 +30,18 @@ public class Shark extends Animal {
     }
 	
 	
-	public Shark(MASWator mas, Environment environment, int posX, int posY, Color color, Random random) {
-        super(mas, environment, posX, posY, color, random);
+	public Shark(MASWator mas, Environment environment, int posX, int posY, Random random) {
+        super(mas, environment, posX, posY, random);
         mStarve = 0;
         mBreed = 0;
     }
 
-    @Override
+	@Override
+	public Color getColor() {
+		return Color.BLUE;
+	}
+
+	@Override
     public void doIt() {
     	if(!mAlive)
     		return;
@@ -45,58 +49,61 @@ public class Shark extends Animal {
     	mStarve++;
     	mBreed++;
     	mAge++;
-    	//System.out.println("--"+this);
-    	//Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
+    	//System.out.println(this);
+    	Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
     	if(mStarve >= starve){
     		mAlive = false;
     		this.mMas.removeAgent(this); //affect mas
-    		this.mEnvironment.setAgent(mPosX, mPosY, null); //affect environment
+			neighbors[1][1].setAgent(null); //affect environment
     		return;
     	}
     	
-    	eatFish();
+    	eatFish(neighbors);
     	
         if(mBreed >= breed){
         	//System.out.println("reproduce");
-        	breed();
+        	breed(neighbors);
         	mBreed = 0;
         	//return; //do not move
         }
+        moveRandom(neighbors);
     	
-    	//move random
-        int[] newPos = this.mEnvironment.getRandomPosition(mPosX, mPosY);
-        if(newPos != null){
-        	//System.out.println("[MOV]"+this);
-	        this.mEnvironment.move(this, newPos[0], newPos[1]);
-	        this.mPosX = newPos[0];
-	        this.mPosY = newPos[1];
-        	//System.out.println("[MOV]"+this);
+    }
+    
+    private void eatFish(Cell[][] neighbors){
+    	ArrayList<Cell> fishs = new ArrayList<Cell>();
+    	for(int y = 0; y <= 2; y++){
+        	for(int x = 0; x <= 2; x++){
+        		//not necessary because we remove the fish of the environment instantatly
+        		//if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish && ((Fish)neighbors[y][x].getAgent()).isAlive()){
+        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish){
+        			fishs.add(neighbors[y][x]);
+        		}
+        	}
         }
     	
-    }
-    
-    private void eatFish(){
-    	
-    	Agent fish = this.mEnvironment.getNeighborFish(mPosX, mPosY);
-    	if(fish == null){
+    	if(fishs.isEmpty()){
     		return;
     	}
+    	int random = mRandom.nextInt(fishs.size());
+    	Cell cellWithFish = fishs.get(random);
     	
-    	//System.out.println("[EAT] "+this);
-    	//System.out.println("[EAT] "+fish);
-    	fish.die();
-		this.mMas.removeAgent(fish); //affect mas
-		mEnvironment.setAgent(fish.getPosX(), fish.getPosY(), null);
-		mStarve = 0;    	
+		((Fish)cellWithFish.getAgent()).kill();
+		this.mMas.removeAgent(cellWithFish.getAgent()); //affect mas
+		cellWithFish.setAgent(null); //affect environment
+		mStarve = 0;
+		return;
+    	
     }
     
     
-    private void breed(){
-		int[] pos = mEnvironment.getRandomPosition(mPosX, mPosY);
+    private void breed(Cell[][] neighbors){
+		Position pos = randomEmptyCell(neighbors);
         if(pos != null){
-        	Agent fish = this.mMas.createShark((pos[0]), (pos[1])); //affect mas
-        	this.mEnvironment.setAgent(pos[0], pos[1], fish);
+        	Agent shark = this.mMas.createShark(mPosX+pos.getX()-1, mPosY+pos.getY()-1); //affect mas
+        	neighbors[pos.getY()][pos.getX()].setAgent(shark); //affect environment
+
         }
     }
     

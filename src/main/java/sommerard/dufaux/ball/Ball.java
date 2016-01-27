@@ -1,4 +1,4 @@
-package sommerard.dufaux.balls;
+package sommerard.dufaux.ball;
 
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.Cell;
@@ -10,17 +10,23 @@ public class Ball extends Agent {
 
     private int mDirX;
     private int mDirY;
+    private Color mColor;
 
     public Ball(Environment environment, int posX, int posY, int dirX, int dirY, Color color) {
-        super(environment, posX, posY, color);
+        super(environment, posX, posY);
         mDirX = dirX;
         mDirY = dirY;
+        mColor = color;
+    }
+
+    @Override
+    public Color getColor() {
+        return mColor;
     }
 
     public void doIt() {
         Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
-        System.out.println(mDirY+" --- "+mDirX);
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
 
         if (nextCell == null) {

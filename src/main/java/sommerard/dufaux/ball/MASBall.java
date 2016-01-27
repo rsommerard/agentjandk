@@ -1,4 +1,4 @@
-package sommerard.dufaux.balls;
+package sommerard.dufaux.ball;
 
 import sommerard.dufaux.core.*;
 
