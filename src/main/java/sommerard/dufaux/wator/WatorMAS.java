@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MASWator extends MAS {
+public class WatorMAS extends MAS {
 
     private int mNbShark;
     private int mNbFish;
@@ -18,7 +18,7 @@ public class MASWator extends MAS {
     private int mSharkBreed;
     private int mStarve;
     
-    public MASWator(View view) {
+    public WatorMAS(View view) {
         super(view);
     }
 

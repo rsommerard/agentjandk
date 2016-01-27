@@ -17,7 +17,7 @@ public class Shark extends Animal {
 
     private int mStarve;
     
-	public Shark(MASWator mas, Environment environment, int posX, int posY, Random random, boolean randomState) {
+	public Shark(WatorMAS mas, Environment environment, int posX, int posY, Random random, boolean randomState) {
         super(mas, environment, posX, posY, random);
         
         if (randomState){
@@ -30,7 +30,7 @@ public class Shark extends Animal {
     }
 	
 	
-	public Shark(MASWator mas, Environment environment, int posX, int posY, Random random) {
+	public Shark(WatorMAS mas, Environment environment, int posX, int posY, Random random) {
         super(mas, environment, posX, posY, random);
         mStarve = 0;
         mBreed = 0;

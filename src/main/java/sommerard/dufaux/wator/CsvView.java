@@ -1,9 +1,6 @@
 package sommerard.dufaux.wator;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +25,7 @@ public class CsvView implements Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		MASWator mas = (MASWator) arg;
+		WatorMAS mas = (WatorMAS) arg;
 		String stats = (mas.getNbFish()/4)+", "+mas.getNbShark();
 		if(mas.getCurrentTurn()%100 == 0){
 			try {

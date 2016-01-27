@@ -1,6 +1,5 @@
 package sommerard.dufaux.wator;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,13 +9,13 @@ import sommerard.dufaux.core.Environment;
 import sommerard.dufaux.core.Position;
 
 public abstract class Animal extends Agent implements Comparable<Animal>{
-	protected MASWator mMas;
+	protected WatorMAS mMas;
 	protected Random mRandom;
 	protected int mBreed;
 	protected int mAge;
 	protected boolean mAlive;
 
-	public Animal(MASWator mas, Environment environment, int posX, int posY, Random random) {
+	public Animal(WatorMAS mas, Environment environment, int posX, int posY, Random random) {
         super(environment, posX, posY);
         mMas = mas;
         mRandom = random;

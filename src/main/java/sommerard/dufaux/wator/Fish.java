@@ -3,18 +3,16 @@ package sommerard.dufaux.wator;
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.Cell;
 import sommerard.dufaux.core.Environment;
-import sommerard.dufaux.core.MAS;
 import sommerard.dufaux.core.Position;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Fish extends Animal {
 
 	private static int breed; //can't be final static because initialize at the execution
 	
-	public Fish(MASWator mas, Environment environment, int posX, int posY, Random random, boolean randomState) {
+	public Fish(WatorMAS mas, Environment environment, int posX, int posY, Random random, boolean randomState) {
         super(mas, environment, posX, posY, random);
         if (randomState){
         	mBreed = random.nextInt(breed);
@@ -23,7 +21,7 @@ public class Fish extends Animal {
         mBreed = 0;
     }
 	
-	public Fish(MASWator mas, Environment environment, int posX, int posY, Random random) {
+	public Fish(WatorMAS mas, Environment environment, int posX, int posY, Random random) {
         super(mas, environment, posX, posY, random);
         //mBreed = random.nextInt(breed);
         mBreed = 0;

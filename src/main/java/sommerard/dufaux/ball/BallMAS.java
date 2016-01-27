@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MASBall extends MAS {
+public class BallMAS extends MAS {
 
     private int mNbAgent;
 
-    public MASBall(View view) {
+    public BallMAS(View view) {
         super(view);
     }
 

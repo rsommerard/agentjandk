@@ -34,16 +34,20 @@ public abstract class MAS extends Observable {
 		mSeed = seed;
 		mAgentSize = agentSize;
 
-		mEnvironment = new Environment(mWidth, mHeight, mToric);
 		mEquity = equity;
 		mCurrentTurn = 0;
 		
 		mRandom = new Random(mSeed);
-		
+
+		initEnvironment();
 		initAgents();
 		
 		setChanged();
 		notifyObservers(this);
+	}
+
+	public void initEnvironment() {
+		mEnvironment = new Environment(mWidth, mHeight, mToric);
 	}
 	
 	public void run() throws InterruptedException {

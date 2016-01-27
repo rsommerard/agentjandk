@@ -1,25 +1,38 @@
-package sommerard.dufaux.ball;
+package sommerard.dufaux.wator;
+
+import java.io.IOException;
+
 
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
 
-public class MainBall {
+public class WatorMain {
 
-    public static final int NB_AGENT = 2000;
+	//super parametre = nb_shark = 500, nb_fish = 500, fish_breed = 4, shark_breed = 10,
+	// starve = 5, with = 120, height = 120, seed = 0, equity = true, toric = true.
+    public static final int NB_SHARK = 500;
+    public static final int NB_FISH = 500;
+    public static final int FISH_BREED = 4;
+    public static final int SHARK_BREED = 10;
+    public static final int STARVE = 5;
     public static final int NB_TURN = 1000000;
-    public static final int WIDTH = 300;
-    public static final int HEIGHT = 200;
-    public static final int AGENT_SIZE = 4;
-    public static final int SPEED = 50;
+    public static final int WIDTH = 120;
+    public static final int HEIGHT = 120;
+    public static final int AGENT_SIZE =  5;
+    public static final int SPEED = 5;
     public static final long SEED = 0;
-    public static final boolean GRID = false;
-    public static final boolean EQUITY = false;
-    public static final boolean TORIC = false;
+    public static final boolean GRID = true;
+    public static final boolean EQUITY = true;
+    public static final boolean TORIC = true;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         Options options = new Options();
-        options.addOption("nbAgent", true, "agent number");
+        options.addOption("nbShark", true, "shark number");
+        options.addOption("nbFish", true, "fish number");
+        options.addOption("fBreed", true, "number of cycles a fish must exist before reprodicing");
+        options.addOption("sBreed", true, "number of cycles a shark must exist before reprodicing");
+        options.addOption("starve", true, "number of cycles a shark has to find food before starving");
         options.addOption("nbTurn", true, "turn number");
         options.addOption("width", true, "environment width");
         options.addOption("height", true, "environment height");
@@ -33,10 +46,34 @@ public class MainBall {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
 
-        int nbAgent = NB_AGENT;
+        int nbShark = NB_SHARK;
 
-        if (cmd.getOptionValue("nbAgent") != null) {
-            nbAgent = Integer.parseInt(cmd.getOptionValue("nbAgent"));
+        if (cmd.getOptionValue("nbShark") != null) {
+            nbShark = Integer.parseInt(cmd.getOptionValue("nbShark"));
+        }
+
+        int nbFish = NB_FISH;
+
+        if (cmd.getOptionValue("nbFish") != null) {
+            nbFish = Integer.parseInt(cmd.getOptionValue("nbFish"));
+        }
+
+        int fBreed = FISH_BREED;
+
+        if (cmd.getOptionValue("fBreed") != null) {
+            fBreed = Integer.parseInt(cmd.getOptionValue("fBreed"));
+        }
+
+        int sBreed = SHARK_BREED;
+
+        if (cmd.getOptionValue("sBreed") != null) {
+            sBreed = Integer.parseInt(cmd.getOptionValue("sBreed"));
+        }
+
+        int starve = STARVE;
+
+        if (cmd.getOptionValue("starve") != null) {
+            starve = Integer.parseInt(cmd.getOptionValue("starve"));
         }
 
         int nbTurn = NB_TURN;
@@ -109,9 +146,25 @@ public class MainBall {
             toric = true;
         }
 
+		
         View view = new View(width, height, agentSize, grid);
-        MASBall masBall = new MASBall(view);
-        masBall.init(nbTurn, nbAgent, width, height, speed, agentSize, equity, seed, toric);
-        masBall.run();
+        CsvView stats = null;
+		try {
+			stats = new CsvView();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        WatorMAS watorMAS = new WatorMAS(view);
+        watorMAS.addObserver(stats);
+        watorMAS.init(nbTurn, nbShark, nbFish, fBreed, sBreed, starve, width, height, speed, agentSize, equity, seed, toric);
+        watorMAS.run();
+        
+        try {
+			stats.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

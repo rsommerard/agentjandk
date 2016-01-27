@@ -21,7 +21,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>sommerard.dufaux.ball.MainBall</mainClass>
+							<mainClass>sommerard.dufaux.ball.BallMain</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
