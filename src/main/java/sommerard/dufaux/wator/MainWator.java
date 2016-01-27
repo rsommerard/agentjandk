@@ -14,20 +14,20 @@ public class MainWator {
 
 	//super parametre = nb_shark = 150, nb_fish = 400, fish_breed = 4, shark_breed = 10,
 	// starve = 3, with = 50, height = 50, seed = 0, equity = true, toric = false.
-    public static final int NB_SHARK = 1000;
-    public static final int NB_FISH = 2000;
-    public static final int FISH_BREED = 12;
+    public static final int NB_SHARK = 300;
+    public static final int NB_FISH = 200;
+    public static final int FISH_BREED = 2;
     public static final int SHARK_BREED = 9;
-    public static final int STARVE = 8;
-    public static final int NB_TURN = 10000;
-    public static final int WIDTH = 200;
-    public static final int HEIGHT = 200;
-    public static final int AGENT_SIZE =  3;
-    public static final int SPEED = 20;
+    public static final int STARVE = 3;
+    public static final int NB_TURN = 400;
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 100;
+    public static final int AGENT_SIZE =  4;
+    public static final int SPEED = 40;
     public static final long SEED = 0;
     public static final boolean GRID = false;
     public static final boolean EQUITY = true;
-    public static final boolean TORIC = false;
+    public static final boolean TORIC = true;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {

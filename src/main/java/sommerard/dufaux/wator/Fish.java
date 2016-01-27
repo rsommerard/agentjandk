@@ -47,54 +47,40 @@ public class Fish extends Animal {
     	
     	mBreed++;
     	mAge++;
-    	//System.out.println(this);
+    	//System.out.println("--"+this);
     	
-        Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
-
-        if(isFullNeighborhood(neighbors)){
+        if(mEnvironment.isFullNeighborhood(mPosX, mPosY)){
         	return; //do not move
         }
         
         
         if(mBreed >= breed){
-        	breed(neighbors);
-        	mBreed = 0;
+        	breed();
         	return; //do not move
         }
         
-        moveRandom(neighbors);
-
+    	
+    	//move random
+        int[] newPos = this.mEnvironment.getRandomPosition(mPosX, mPosY);
+        if(newPos != null){
+        	//System.out.println("[MOV]"+this);
+	        this.mEnvironment.move(this, newPos[0], newPos[1]);
+	        this.mPosX = newPos[0];
+	        this.mPosY = newPos[1];
+        	//System.out.println("[MOV]"+this);
+        }
 
     }
     
-    //NOT USED FOR THE MOMENT
-    /*
-    private void moveToEscape(Cell[][] neighbors) {
-    	int nextDirX = 0, nextDirY = 0;
-    	analyzeEnvironment:
-        for(int y = 0; y <= 2; y++){
-        	for(int x = 0; x <= 2; x++){
-        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Shark){
-        			//try to move
-                	nextDirX = 1-x;
-                    nextDirY = 1-y;
-                    if(neighbors[nextDirY+1][nextDirX+1] != null && neighbors[nextDirY+1][nextDirX+1].getAgent() == null){
-                    	//case free
-                    	break analyzeEnvironment;
-                    }
-        		}
-        	}
-        }
-
-		System.out.println("Move random dirX="+nextDirX+" and dirY ="+nextDirY+"]");
-        moveAgent(neighbors,nextDirX,nextDirY);
-	}*/
     
-    private void breed(Cell[][] neighbors){
-		Position pos = randomEmptyCell(neighbors);
+    private void breed(){
+		int[] pos = mEnvironment.getRandomPosition(mPosX, mPosY);
         if(pos != null){
-        	Agent fish = this.mMas.createFish((mPosX+pos.getX()-1), (mPosY+pos.getY()-1)); //affect mas
-        	neighbors[pos.getY()][pos.getX()].setAgent(fish); //affect environment
+        	Agent fish = this.mMas.createFish((pos[0]), (pos[1])); //affect mas
+        	this.mEnvironment.setAgent(pos[0], pos[1], fish);
+
+        	//System.out.println("[BRE] "+fish);
+        	mBreed = 0;
         }
     }
     

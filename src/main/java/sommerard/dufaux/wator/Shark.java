@@ -23,7 +23,7 @@ public class Shark extends Animal {
         
         if (randomState){
         	mBreed = random.nextInt(breed);        
-        	mStarve = random.nextInt(starve-1)+2;
+        	mStarve = random.nextInt(starve-1);
         	return;
         }
         mStarve = 0;
@@ -45,61 +45,58 @@ public class Shark extends Animal {
     	mStarve++;
     	mBreed++;
     	mAge++;
-    	//System.out.println(this);
-    	Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
+    	//System.out.println("--"+this);
+    	//Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
     	if(mStarve >= starve){
     		mAlive = false;
     		this.mMas.removeAgent(this); //affect mas
-			neighbors[1][1].setAgent(null); //affect environment
+    		this.mEnvironment.setAgent(mPosX, mPosY, null); //affect environment
     		return;
     	}
     	
-    	eatFish(neighbors);
+    	eatFish();
     	
         if(mBreed >= breed){
         	//System.out.println("reproduce");
-        	breed(neighbors);
+        	breed();
         	mBreed = 0;
         	//return; //do not move
         }
-        moveRandom(neighbors);
     	
-    }
-    
-    private void eatFish(Cell[][] neighbors){
-    	ArrayList<Cell> fishs = new ArrayList<Cell>();
-    	for(int y = 0; y <= 2; y++){
-        	for(int x = 0; x <= 2; x++){
-        		//not necessary because we remove the fish of the environment instantatly
-        		//if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish && ((Fish)neighbors[y][x].getAgent()).isAlive()){
-        		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Fish){
-        			fishs.add(neighbors[y][x]);
-        		}
-        	}
+    	//move random
+        int[] newPos = this.mEnvironment.getRandomPosition(mPosX, mPosY);
+        if(newPos != null){
+        	//System.out.println("[MOV]"+this);
+	        this.mEnvironment.move(this, newPos[0], newPos[1]);
+	        this.mPosX = newPos[0];
+	        this.mPosY = newPos[1];
+        	//System.out.println("[MOV]"+this);
         }
     	
-    	if(fishs.isEmpty()){
+    }
+    
+    private void eatFish(){
+    	
+    	Agent fish = this.mEnvironment.getNeighborFish(mPosX, mPosY);
+    	if(fish == null){
     		return;
     	}
-    	int random = mRandom.nextInt(fishs.size());
-    	Cell cellWithFish = fishs.get(random);
     	
-		((Fish)cellWithFish.getAgent()).die();
-		this.mMas.removeAgent(cellWithFish.getAgent()); //affect mas
-		cellWithFish.setAgent(null); //affect environment
-		mStarve = 0;
-		return;
-    	
+    	//System.out.println("[EAT] "+this);
+    	//System.out.println("[EAT] "+fish);
+    	fish.die();
+		this.mMas.removeAgent(fish); //affect mas
+		mEnvironment.setAgent(fish.getPosX(), fish.getPosY(), null);
+		mStarve = 0;    	
     }
     
     
-    private void breed(Cell[][] neighbors){
-		Position pos = randomEmptyCell(neighbors);
+    private void breed(){
+		int[] pos = mEnvironment.getRandomPosition(mPosX, mPosY);
         if(pos != null){
-        	Agent shark = this.mMas.createShark(mPosX+pos.getX()-1, mPosY+pos.getY()-1); //affect mas
-        	neighbors[pos.getY()][pos.getX()].setAgent(shark); //affect environment
-
+        	Agent fish = this.mMas.createShark((pos[0]), (pos[1])); //affect mas
+        	this.mEnvironment.setAgent(pos[0], pos[1], fish);
         }
     }
     

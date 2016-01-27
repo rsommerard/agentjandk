@@ -36,41 +36,6 @@ public class View extends JFrame implements Observer {
         setVisible(true);
     }
 
-    /*public void paint(Graphics graphics) {
-        super.paint(graphics);
-
-        if (mGrid) {
-            paintGrid(graphics);
-        }
-
-        paintAgents(graphics);
-    }
-
-    private void paintAgents(Graphics graphics) {
-        if (mMas == null) {
-            return;
-        }
-
-        List<Agent> agents = mMas.getAgents();
-
-        for(Agent agent : agents) {
-            graphics.setColor(agent.getColor());
-            graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);
-        }
-    }
-
-    private void paintGrid(Graphics graphics) {
-        graphics.setColor(Color.BLACK);
-
-        for (int i = 0; i <= mHeight; i++) {
-            graphics.drawLine(0, (i * mAgentSize) + TOP_OFFSET, mWidth * mAgentSize, (i * mAgentSize) + TOP_OFFSET);
-        }
-
-        for (int i = 0; i <= mWidth; i++) {
-            graphics.drawLine((i * mAgentSize), TOP_OFFSET, i * mAgentSize, (mHeight * mAgentSize) + TOP_OFFSET);
-        }
-    }*/
-
     public void update(Observable o, Object arg) {    	
     	//System.out.println("UPDATE VIEW");
         mMas = (MAS) arg;

@@ -27,7 +27,6 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
 	protected Random mRandom;
 	protected int mBreed;
 	protected int mAge;
-	protected boolean mAlive;
 
 	public Animal(MASWator mas, Environment environment, int posX, int posY, Color color, Random random) {
         super(environment, posX, posY, color);
@@ -35,7 +34,6 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
         mRandom = random;
         //mBreed = mRandom.nextInt(breed);
         mAge = 0;
-        mAlive = true;
     }
 	
 	
@@ -100,13 +98,6 @@ public abstract class Animal extends Agent implements Comparable<Animal>{
     }
     
     
-    public void die(){
-    	this.mAlive = false;
-    }
-    
-    public boolean isAlive(){
-    	return this.mAlive;
-    }
     
     public int compareTo(Animal animal){
     	if(animal.mAge > mAge)

@@ -119,9 +119,9 @@ public class MASWator extends MAS {
     	int newPosX = Math.floorMod(posX, mWidth);
     	int newPosY = Math.floorMod(posY, mHeight);
     	Agent fish = new Fish(this, mEnvironment, newPosX, newPosY, Color.PINK, mRandom);
-    	mAgents.add(fish);
+    	addInTurn.add(fish);
     	mNbFish++;
-    	mEnvironment.setAgent(newPosX, newPosY, fish);
+    	//mEnvironment.setAgent(newPosX, newPosY, fish);
     	return fish;
     }
 
@@ -129,9 +129,9 @@ public class MASWator extends MAS {
     	int newPosX = Math.floorMod(posX, mWidth);
     	int newPosY = Math.floorMod(posY, mHeight);
     	Agent shark = new Shark(this, mEnvironment, newPosX, newPosY, Color.BLACK, mRandom);
-    	mAgents.add(shark);
+    	addInTurn.add(shark);
     	mNbShark++;
-    	mEnvironment.setAgent(newPosX, newPosY, shark);
+    	//mEnvironment.setAgent(newPosX, newPosY, shark);
     	return shark;
 	}
 	
@@ -142,7 +142,7 @@ public class MASWator extends MAS {
     	if(agent instanceof Shark){
     		mNbShark--;
     	}
-    	return mAgents.remove(agent);
+    	return removeInTurn.add(agent);
     }
 
     public int getNbFish(){

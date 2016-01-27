@@ -20,6 +20,9 @@ public abstract class MAS extends Observable {
 	protected long mSeed;
 	protected int mCurrentTurn;
 
+	protected List<Agent> addInTurn = new ArrayList<Agent>();
+	protected List<Agent> removeInTurn = new ArrayList<Agent>();
+	
 	public MAS(View view){
         addObserver(view);
         mAgents = new ArrayList<Agent>();
@@ -34,11 +37,11 @@ public abstract class MAS extends Observable {
 		mSeed = seed;
 		mAgentSize = agentSize;
 
-		mEnvironment = new Environment(mWidth, mHeight, mToric);
+		mRandom = new Random(mSeed);
+		
+		mEnvironment = new Environment(mWidth, mHeight, mToric, mRandom);
 		mEquity = equity;
 		mCurrentTurn = 0;
-		
-		mRandom = new Random(mSeed);
 		
 		initAgents();
 		
@@ -60,14 +63,29 @@ public abstract class MAS extends Observable {
 			}
 
             
-            List<Agent> agentsBeforeRun = new ArrayList<Agent>();
-            agentsBeforeRun.addAll(mAgents);
-			for (Agent agent : agentsBeforeRun) {
+            /*List<Agent> agentsBeforeRun = new ArrayList<Agent>();
+            agentsBeforeRun.addAll(mAgents);*/
+			for (Agent agent : mAgents) {
                 agent.doIt();
 			}
-
+			
+			//clean dead agents
+			for(Agent agent : removeInTurn){
+			mAgents.remove(agent);
+			}
+			removeInTurn.clear();
+			
+			for(Agent agent : addInTurn){
+				if(agent.isAlive()){
+					mAgents.add(agent);
+				}
+			}
+			addInTurn.clear();
+			
 			System.out.println("turn "+mCurrentTurn);
-			System.out.println("nbAgent = "+mAgents.size());
+			/*System.out.println("nbAgent = "+mAgents.size());
+			System.out.println("removeInTurn = "+removeInTurn.size());
+			System.out.println("addInTurn = "+addInTurn.size());*/
 			mCurrentTurn++;
 		}
 	}
