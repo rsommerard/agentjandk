@@ -1,5 +1,7 @@
 package sommerard.dufaux.pacman;
 
+import java.awt.event.KeyAdapter;
+
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
 
@@ -10,7 +12,7 @@ public class PacmanMain {
     public static final int WIDTH = 20;
     public static final int HEIGHT = 20;
     public static final int AGENT_SIZE =  30;
-    public static final int SPEED = 500;
+    public static final int SPEED = 100;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;
@@ -102,7 +104,9 @@ public class PacmanMain {
         }
 
         View view = new View(width, height, agentSize, grid);
-        PacmanMAS pacmanMAS = new PacmanMAS();
+        KeyboardListener keyAdaptator = new KeyboardListener();
+        view.addKeyListener(keyAdaptator);
+        PacmanMAS pacmanMAS = new PacmanMAS(keyAdaptator);
         
         pacmanMAS.addObserver(view);
         pacmanMAS.init(nbPredator, nbRock, width, height, speed, agentSize, equity, seed);

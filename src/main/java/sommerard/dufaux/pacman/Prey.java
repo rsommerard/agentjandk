@@ -1,9 +1,11 @@
 package sommerard.dufaux.pacman;
 
 import sommerard.dufaux.core.Agent;
+import sommerard.dufaux.core.Cell;
 import sommerard.dufaux.core.Environment;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Prey extends Agent {
 
@@ -21,8 +23,61 @@ public class Prey extends Agent {
         return Color.YELLOW;
     }
 
-    @Override
     public void doIt() {
+        Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
+        Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
+
+        if (nextCell == null) {
+            return; //do not move
+        } else {
+            if (nextCell.getAgent() == null) {
+                moveAgent(neighbors);
+            }
+        }
     }
+
+    private void moveAgent(Cell[][] neighbors) {
+        neighbors[1][1].setAgent(null);
+        neighbors[mDirY + 1][mDirX + 1].setAgent(this);
+        mPosX = mPosX + mDirX;
+        mPosY = mPosY + mDirY;
+    }
+    
+    
+    /**
+     * use arrow key or qzsd to move.
+     * @param e
+     */
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q){
+			mDirX= -1;
+		}
+		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
+			mDirX= 1;
+		}
+		if(key == KeyEvent.VK_UP || key == KeyEvent.VK_Z){
+			mDirY= -1;
+		}
+		if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S){
+			mDirY= 1;
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q){
+			mDirX= 0;
+		}
+		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
+			mDirX= 0;
+		}
+		if(key == KeyEvent.VK_UP || key == KeyEvent.VK_Z){
+			mDirY= 0;
+		}
+		if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S){
+			mDirY= 0;
+		}
+	}
 }

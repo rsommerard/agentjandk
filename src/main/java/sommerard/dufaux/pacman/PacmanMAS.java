@@ -10,9 +10,11 @@ public class PacmanMAS extends MAS {
 
     private int mNbPredator;
     private int mNbRock;
+    private KeyboardListener mKeyListener;
 
-    public PacmanMAS() {
+    public PacmanMAS(KeyboardListener keyListener) {
         super();
+        this.mKeyListener = keyListener;
     }
 
     public void init(int nbPredator, int nbRock, int width, int height, int speed, int agentSize, boolean equity, long seed) {
@@ -27,16 +29,16 @@ public class PacmanMAS extends MAS {
 
     @Override
     public void initAgents() {
+    	
         List<Position> positions = new ArrayList<Position>();
-
         for (int y = 0; y < mHeight; y++) {
             for (int x = 0; x < mWidth; x++) {
                 positions.add(new Position(x, y));
             }
         }
-
         Collections.shuffle(positions, mRandom);
 
+        //CREATE ROCKS
         for (int i = 0; i < mNbRock; i++) {
             Position position = positions.get(0);
 
@@ -47,6 +49,7 @@ public class PacmanMAS extends MAS {
             positions.remove(0);
         }
 
+        //CREATE PREDATORS
         for (int i = 0; i < mNbPredator; i++) {
             Position position = positions.get(0);
 
@@ -57,10 +60,12 @@ public class PacmanMAS extends MAS {
             positions.remove(0);
         }
 
+        //CREATE THE PREY
         Position position = positions.get(0);
-        Agent prey = new Prey(mEnvironment, position.getX(), position.getY());
+        Prey prey = new Prey(mEnvironment, position.getX(), position.getY());
         mAgents.add(prey);
         mEnvironment.setAgent(position.getX(), position.getY(), prey);
         positions.remove(0);
+        this.mKeyListener.setPrey(prey);
     }
 }
