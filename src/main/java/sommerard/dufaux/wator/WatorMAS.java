@@ -18,8 +18,8 @@ public class WatorMAS extends MAS {
     private int mSharkBreed;
     private int mStarve;
     
-    public WatorMAS(View view) {
-        super(view);
+    public WatorMAS() {
+        super();
     }
 
     @Override

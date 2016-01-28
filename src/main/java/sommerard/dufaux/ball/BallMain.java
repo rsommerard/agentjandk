@@ -110,7 +110,8 @@ public class BallMain {
         }
 
         View view = new View(width, height, agentSize, grid);
-        BallMAS ballMAS = new BallMAS(view);
+        BallMAS ballMAS = new BallMAS();
+        ballMAS.addObserver(view);
         ballMAS.init(nbTurn, nbAgent, width, height, speed, agentSize, equity, seed, toric);
         ballMAS.run();
     }

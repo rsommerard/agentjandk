@@ -102,8 +102,9 @@ public class PacmanMain {
         }
 
         View view = new View(width, height, agentSize, grid);
-
-        PacmanMAS pacmanMAS = new PacmanMAS(view);
+        PacmanMAS pacmanMAS = new PacmanMAS();
+        
+        pacmanMAS.addObserver(view);
         pacmanMAS.init(nbPredator, nbRock, width, height, speed, agentSize, equity, seed);
         pacmanMAS.run();
 

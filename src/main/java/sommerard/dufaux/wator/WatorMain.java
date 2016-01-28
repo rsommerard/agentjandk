@@ -155,7 +155,8 @@ public class WatorMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        WatorMAS watorMAS = new WatorMAS(view);
+        WatorMAS watorMAS = new WatorMAS();
+        watorMAS.addObserver(view);
         watorMAS.addObserver(stats);
         watorMAS.init(nbTurn, nbShark, nbFish, fBreed, sBreed, starve, width, height, speed, agentSize, equity, seed, toric);
         watorMAS.run();

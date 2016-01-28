@@ -11,8 +11,8 @@ public class BallMAS extends MAS {
 
     private int mNbAgent;
 
-    public BallMAS(View view) {
-        super(view);
+    public BallMAS() {
+        super();
     }
 
     public void init(int nbTurn, int nbAgent, int width, int height, int speed, int agentSize, boolean equity, long seed, boolean toric) {

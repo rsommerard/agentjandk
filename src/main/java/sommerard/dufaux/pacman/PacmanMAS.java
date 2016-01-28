@@ -11,8 +11,8 @@ public class PacmanMAS extends MAS {
     private int mNbPredator;
     private int mNbRock;
 
-    public PacmanMAS(View view) {
-        super(view);
+    public PacmanMAS() {
+        super();
     }
 
     public void init(int nbPredator, int nbRock, int width, int height, int speed, int agentSize, boolean equity, long seed) {
