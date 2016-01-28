@@ -20,8 +20,7 @@ public abstract class MAS extends Observable {
 	protected long mSeed;
 	protected int mCurrentTurn;
 
-	public MAS(View view){
-        addObserver(view);
+	public MAS(){
         mAgents = new ArrayList<Agent>();
 	}
 
