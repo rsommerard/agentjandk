@@ -26,7 +26,7 @@ public class PacmanCanvas extends Canvas {
                     graphics.fillRect(x * mAgentSize, (y * mAgentSize), mAgentSize, mAgentSize);
                 } else {
                     graphics.setColor(Color.BLACK);
-                    graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), x * mAgentSize, y * mAgentSize);
+                    graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize), (y * mAgentSize)+mAgentSize);
                 }
             }
         }
