@@ -18,4 +18,6 @@ public class PacmanCell extends Cell {
     public void setDijkstraValue(int dijkstraValue) {
         mDijkstraValue = dijkstraValue;
     }
+
+
 }

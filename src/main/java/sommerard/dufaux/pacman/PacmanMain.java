@@ -103,7 +103,7 @@ public class PacmanMain {
             equity = true;
         }
 
-        View view = new View(width, height, agentSize, grid);
+        View view = new PacmanView(width, height, agentSize, grid);
         KeyboardListener keyAdaptator = new KeyboardListener();
         view.addKeyListener(keyAdaptator);
         PacmanMAS pacmanMAS = new PacmanMAS(keyAdaptator);

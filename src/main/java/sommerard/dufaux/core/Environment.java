@@ -4,22 +4,22 @@ import java.util.List;
 
 public class Environment {
 
-	private boolean mToric;
-	private int mWidth; //X
-	private int mHeight; //Y
-	private Cell[][] mCells; //[Y][X]
+	protected boolean mToric;
+	protected int mWidth; //X
+	protected int mHeight; //Y
+	protected Cell[][] mCells; //[Y][X]
 	//idée : faire une map <Position,Agent> 
 
 	public Environment(int width, int height, boolean toric) {
 		mToric = toric;
 		mWidth = width;
 		mHeight = height;
-		mCells = new Cell[height][width];
 
 		initCells();
 	}
 
-	private void initCells() {
+	protected void initCells() {
+		mCells = new Cell[mHeight][mWidth];
 		for (int y = 0; y < mHeight; y++) {
 			for (int x = 0; x < mWidth; x++) {
 				mCells[y][x] = new Cell(null);

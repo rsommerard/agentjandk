@@ -8,11 +8,11 @@ import java.util.List;
 public class View extends JFrame implements Observer {
 
     private MAS mMas;
-    private boolean mGrid;
-    private int mAgentSize;
-    private int mWidth;
-    private int mHeight;
-    private Canvas mCanvas;
+    protected boolean mGrid;
+    protected int mAgentSize;
+    protected int mWidth;
+    protected int mHeight;
+    protected Canvas mCanvas;
     
     
     //private static final int TOP_OFFSET = 20;
@@ -26,7 +26,8 @@ public class View extends JFrame implements Observer {
         mGrid = grid;
         mAgentSize = agentSize;
 
-        mCanvas = new Canvas(width, height, agentSize, grid);
+        createCanvas();
+
         this.setLayout(new BorderLayout());
         this.add(mCanvas, BorderLayout.CENTER);
         setSize(mWidth * mAgentSize + 2, mHeight * mAgentSize + TOP_OFFSET);
@@ -36,11 +37,14 @@ public class View extends JFrame implements Observer {
         setVisible(true);
     }
 
+    protected void createCanvas() {
+        mCanvas = new Canvas(mWidth, mHeight, mAgentSize, mGrid);
+    }
+
     public void update(Observable o, Object arg) {    	
 
         mMas = (MAS) arg;
         mCanvas.setMas(mMas);
         repaint();
-
 	}
 }

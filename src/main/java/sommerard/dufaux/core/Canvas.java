@@ -10,11 +10,11 @@ import javax.swing.WindowConstants;
 
 public class Canvas extends JPanel{
 	
-    private MAS mMas;
+    protected MAS mMas;
     private boolean mGrid;
-    private int mAgentSize;
-    private int mWidth;
-    private int mHeight;
+    protected int mAgentSize;
+    protected int mWidth;
+    protected int mHeight;
 	
     public Canvas(int width, int height, int agentSize, boolean grid) {
         mWidth = width;
@@ -24,8 +24,7 @@ public class Canvas extends JPanel{
 
         this.setSize(mWidth * mAgentSize, mHeight * mAgentSize);
     }
-    
-    
+
     public void paintComponent(Graphics g) {
     	//System.out.println("paint component");
     	if (mGrid) {
@@ -33,22 +32,18 @@ public class Canvas extends JPanel{
         }
         paintAgents(g);
     }
-    
 
-    private void paintAgents(Graphics graphics) {
+    protected void paintAgents(Graphics graphics) {
         if (mMas == null) {
             return;
         }
 
         List<Agent> agents = new ArrayList<Agent>(mMas.getAgents());
 
-        //System.out.println("paint "+agents.size()+" agents");
         for(Agent agent : agents) {
         	if(agent != null){
         		graphics.setColor(agent.getColor());
         		graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize), mAgentSize, mAgentSize);
-        		//graphics.fillRoundRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize) + TOP_OFFSET, mAgentSize, mAgentSize);
-        		//graphics.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
         	}
         }
         
@@ -65,7 +60,6 @@ public class Canvas extends JPanel{
             graphics.drawLine((i * mAgentSize), 0, i * mAgentSize, (mHeight * mAgentSize));
         }
     }
-
 
 	public void setMas(MAS mas) {
 		this.mMas = mas;
