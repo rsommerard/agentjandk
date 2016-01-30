@@ -16,6 +16,7 @@ public class Prey extends Agent {
         super(environment, posX, posY);
         mDirX = 0;
         mDirY = 0;
+        ((PacmanEnvironment)mEnvironment).calculateDikjstra(mPosX, mPosY);
     }
 
     @Override
@@ -33,6 +34,8 @@ public class Prey extends Agent {
         } else {
             if (nextCell.getAgent() == null) {
                 moveAgent(neighbors);
+                ((PacmanEnvironment)mEnvironment).resetDikjstra();
+                ((PacmanEnvironment)mEnvironment).calculateDikjstra(mPosX, mPosY);
             }
         }
     }
