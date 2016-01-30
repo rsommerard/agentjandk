@@ -47,12 +47,16 @@ public class PacmanEnvironment extends Environment {
 	    	
 	        for (int y = 0; y <= 2; y++) {
 	            for (int x = 0; x <= 2; x++) {
-	            	if(cells[y][x] != null && cells[y][x].getAgent() == null && 
+	            	if(cells[y][x] != null && //cells[y][x].getAgent() == null && 
 	            	(cells[y][x].getDijkstraValue() == 0 || cells[y][x].getDijkstraValue() > currentDistance)){
 	            		cells[y][x].setDijkstraValue(currentDistance);
 	            		globalX = x+pX-1; //need to set globalPos because we work with local coord (neighbors)
 	            		globalY = y+pY-1;
-	            		modifiedCells.addLast(new Position(globalX,globalY));
+	            		
+	            		//(we need to modify neighbors only if the case is empty (not agent)){
+	            		if(cells[y][x].getAgent() == null){
+	            			modifiedCells.addLast(new Position(globalX,globalY));
+	            		}
 	            	}
 	            }
 	        }

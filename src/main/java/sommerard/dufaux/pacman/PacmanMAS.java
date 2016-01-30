@@ -68,4 +68,5 @@ public class PacmanMAS extends MAS {
         positions.remove(0);
         this.mKeyListener.setPrey(prey);
     }
+    
 }
