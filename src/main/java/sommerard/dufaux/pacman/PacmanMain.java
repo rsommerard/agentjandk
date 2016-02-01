@@ -8,14 +8,15 @@ import sommerard.dufaux.core.View;
 public class PacmanMain {
 
     public static final int NB_PREDATOR = 3;
-    public static final int NB_ROCK = 300;
-    public static final int WIDTH = 70;
-    public static final int HEIGHT = 70;
-   public static final int AGENT_SIZE =  14;
+    public static final int NB_ROCK = 100;
+    public static final int WIDTH = 350;
+    public static final int HEIGHT = 200;
+  	public static final int AGENT_SIZE =  5;
     public static final int SPEED = 100;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;
+    public static final boolean DIJKSTRA = false;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {
@@ -103,7 +104,9 @@ public class PacmanMain {
             equity = true;
         }
 
-        View view = new PacmanView(width, height, agentSize, grid);
+        boolean dijkstra = DIJKSTRA;
+        
+        View view = new PacmanView(width, height, agentSize, grid, dijkstra);
         KeyboardListener keyAdaptator = new KeyboardListener();
         view.addKeyListener(keyAdaptator);
         PacmanMAS pacmanMAS = new PacmanMAS(keyAdaptator);

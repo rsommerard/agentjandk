@@ -7,8 +7,11 @@ import java.awt.*;
 
 public class PacmanCanvas extends Canvas {
 
-    public PacmanCanvas(int width, int height, int agentSize, boolean grid) {
+	private boolean mDijkstra;
+	
+    public PacmanCanvas(int width, int height, int agentSize, boolean grid, boolean dijkstra) {
         super(width, height, agentSize, grid);
+        mDijkstra = dijkstra;
     }
 
     protected void paintAgents(Graphics graphics) {
@@ -25,8 +28,10 @@ public class PacmanCanvas extends Canvas {
                     graphics.setColor(agent.getColor());
                     graphics.fillRect(x * mAgentSize, (y * mAgentSize), mAgentSize, mAgentSize);
                 } else {
+                	if(mDijkstra){
                     graphics.setColor(Color.BLACK);
                     graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize), (y * mAgentSize)+mAgentSize);
+                	}
                 }
             }
         }
