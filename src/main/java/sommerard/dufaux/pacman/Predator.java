@@ -3,8 +3,11 @@ package sommerard.dufaux.pacman;
 import sommerard.dufaux.core.Agent;
 import sommerard.dufaux.core.Cell;
 import sommerard.dufaux.core.Environment;
+import sommerard.dufaux.core.Position;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Predator extends Agent {
 
@@ -19,8 +22,13 @@ public class Predator extends Agent {
 
     @Override
     public void doIt() {
+    	if(((PacmanEnvironment)mEnvironment).getFinish()){
+    		return;
+    	}
+    	
         PacmanCell[][] neighbors = ((PacmanEnvironment)mEnvironment).getPacmanNeighbors(mPosX, mPosY);
         int minDijkstraValue = 0;
+        ArrayList<Position> nextCells = new ArrayList<Position>();
         int xMin = 1;
         int yMin = 1;
         
@@ -28,18 +36,23 @@ public class Predator extends Agent {
         	for(int x = 0; x <= 2; x++){
         		
         		if(neighbors[y][x] != null && neighbors[y][x].getAgent() instanceof Prey){
-        			System.out.println("END OF GAME");
+        			((PacmanEnvironment)mEnvironment).setFinish(true);
         			
         		}else if(neighbors[y][x] != null && neighbors[y][x].getAgent() == null){
         			if(minDijkstraValue == 0 || neighbors[y][x].getDijkstraValue() < minDijkstraValue){
         				minDijkstraValue = neighbors[y][x].getDijkstraValue();
-        				xMin = x;
-        				yMin = y;
+        				nextCells.clear();
+        				nextCells.add(new Position(x,y));
+        			}else if(minDijkstraValue == 0 || neighbors[y][x].getDijkstraValue() == minDijkstraValue){
+        				//if same distance, take it randomly (to have a random beetween 
+        				minDijkstraValue = neighbors[y][x].getDijkstraValue();
+        				nextCells.add(new Position(x,y));
         			}
         		}
         	}
         }
-        moveAgent(neighbors, xMin, yMin);
+        Collections.shuffle(nextCells);
+        moveAgent(neighbors, nextCells.get(0).getX(), nextCells.get(0).getY());
     }
     
     protected void moveAgent(Cell[][] neighbors, int posX, int posY) {

@@ -1,6 +1,7 @@
 package sommerard.dufaux.pacman;
 
 import java.awt.event.KeyAdapter;
+import java.util.Random;
 
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
@@ -9,14 +10,14 @@ public class PacmanMain {
 
     public static final int NB_PREDATOR = 3;
     public static final int NB_ROCK = 100;
-    public static final int WIDTH = 350;
-    public static final int HEIGHT = 200;
-  	public static final int AGENT_SIZE =  5;
-    public static final int SPEED = 100;
+    public static final int WIDTH = 50;
+    public static final int HEIGHT = 50;
+  	public static final int AGENT_SIZE = 16;
+    public static final int SPEED = 200;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;
-    public static final boolean DIJKSTRA = false;
+    public static final boolean DIJKSTRA = true;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {
@@ -90,6 +91,8 @@ public class PacmanMain {
 
         if (cmd.getOptionValue("seed") != null) {
             seed = Long.parseLong(cmd.getOptionValue("seed"));
+        }else{
+        	seed = new Random().nextLong();
         }
 
         boolean grid = GRID;
@@ -107,6 +110,7 @@ public class PacmanMain {
         boolean dijkstra = DIJKSTRA;
         
         View view = new PacmanView(width, height, agentSize, grid, dijkstra);
+        view.init();
         KeyboardListener keyAdaptator = new KeyboardListener();
         view.addKeyListener(keyAdaptator);
         PacmanMAS pacmanMAS = new PacmanMAS(keyAdaptator);

@@ -30,7 +30,7 @@ public class PacmanCanvas extends Canvas {
                 } else {
                 	if(mDijkstra){
                     graphics.setColor(Color.BLACK);
-                    graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize), (y * mAgentSize)+mAgentSize);
+                    graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize)+1, (y * mAgentSize)+mAgentSize-1);
                 	}
                 }
             }

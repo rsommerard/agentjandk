@@ -69,5 +69,13 @@ public class Environment {
     public int getHeight(){
     	return mHeight;
     }
+
+	public void reset() {
+		for (int y = 0; y < mHeight; y++) {
+			for (int x = 0; x < mWidth; x++) {
+				mCells[y][x].setAgent(null);
+			}
+		}
+	}
     
 }

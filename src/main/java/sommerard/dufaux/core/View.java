@@ -25,7 +25,9 @@ public class View extends JFrame implements Observer {
         mHeight = height;
         mGrid = grid;
         mAgentSize = agentSize;
-
+    }
+    
+    public void init(){
         createCanvas();
 
         this.setLayout(new BorderLayout());

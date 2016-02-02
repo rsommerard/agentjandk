@@ -56,6 +56,8 @@ public abstract class MAS extends Observable {
 			notifyObservers(this);
 			Thread.sleep(mSpeed);
 
+			if(checkStop())
+				break;
 			
 			//System.out.println("TURN "+i);
             if (mEquity) {
@@ -88,4 +90,8 @@ public abstract class MAS extends Observable {
 	public int getCurrentTurn() {
 		return mCurrentTurn;
 	}
+	
+	protected boolean checkStop(){
+		return false;
+    }
 }

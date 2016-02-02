@@ -10,6 +10,7 @@ import sommerard.dufaux.core.Position;
 
 public class PacmanEnvironment extends Environment {
 	private int compteur = 0;
+	private boolean mFinish;
 	//private LinkedList<Position> modifiedCells = new LinkedList<Position>();
 	
     public PacmanEnvironment(int width, int height, boolean toric) {
@@ -167,4 +168,13 @@ public class PacmanEnvironment extends Environment {
             }
         }
     }
+    
+
+	public void setFinish(boolean end) {
+		mFinish = end;
+		
+	}
+	public boolean getFinish(){
+		return this.mFinish;
+	}
 }

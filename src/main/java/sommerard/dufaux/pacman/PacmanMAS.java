@@ -69,4 +69,18 @@ public class PacmanMAS extends MAS {
         this.mKeyListener.setPrey(prey);
     }
     
+    
+    @Override
+	protected boolean checkStop(){
+    	if(((PacmanEnvironment)mEnvironment).getFinish()){
+    		System.out.println("END OF GAME");
+    		
+    		for(Agent a : mAgents){
+    			System.out.println(a);
+    		}
+    		return true;
+    	}
+    	return false;
+    }
+    
 }

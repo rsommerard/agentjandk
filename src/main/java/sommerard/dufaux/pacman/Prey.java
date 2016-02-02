@@ -25,6 +25,9 @@ public class Prey extends Agent {
     }
 
     public void doIt() {
+    	if(((PacmanEnvironment)mEnvironment).getFinish()){
+    		return;
+    	}
         Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];

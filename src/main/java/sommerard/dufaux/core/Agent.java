@@ -26,4 +26,9 @@ public abstract class Agent {
     public int getPosY() {
         return mPosY;
     }
+    
+    @Override
+    public String toString(){
+    	return this.getClass().getName()+" ["+mPosY+"]["+mPosX+"]";
+    }
 }
