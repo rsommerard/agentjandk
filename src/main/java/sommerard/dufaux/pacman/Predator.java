@@ -11,8 +11,11 @@ import java.util.Collections;
 
 public class Predator extends Agent {
 
-    public Predator(Environment environment, int posX, int posY) {
-        super(environment, posX, posY);
+	private int mSpeedRatio;
+	
+    public Predator(Environment environment, int posX, int posY, int speedRatio) {
+        super(environment, posX, posY, speedRatio);
+        System.out.println("Construct predator ["+posY+"]["+posX+"] with ratioSpeed = "+speedRatio);
     }
 
     @Override
@@ -25,6 +28,7 @@ public class Predator extends Agent {
     	if(((PacmanEnvironment)mEnvironment).getFinish()){
     		return;
     	}
+    	
     	
         PacmanCell[][] neighbors = ((PacmanEnvironment)mEnvironment).getPacmanNeighbors(mPosX, mPosY);
         int minDijkstraValue = 0;

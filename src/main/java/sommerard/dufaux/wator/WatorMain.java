@@ -12,16 +12,16 @@ public class WatorMain {
 	// starve = 5, with = 120, height = 120, seed = 0, equity = true, toric = true.
     public static final int NB_SHARK = 500;
     public static final int NB_FISH = 500;
-    public static final int FISH_BREED = 4;
-    public static final int SHARK_BREED = 10;
-    public static final int STARVE = 5;
-    public static final int NB_TURN = 1000000;
+    public static final int FISH_BREED = 6;
+    public static final int SHARK_BREED = 7;
+    public static final int STARVE = 6;
+    public static final int NB_TURN = 3000;
     public static final int WIDTH = 120;
     public static final int HEIGHT = 120;
     public static final int AGENT_SIZE =  5;
-    public static final int SPEED = 5;
+    public static final int SPEED = 0;
     public static final long SEED = 0;
-    public static final boolean GRID = true;
+    public static final boolean GRID = false;
     public static final boolean EQUITY = true;
     public static final boolean TORIC = true;
 
@@ -147,8 +147,8 @@ public class WatorMain {
         }
 
 		
-        View view = new View(width, height, agentSize, grid);
-        view.init();
+        /*View view = new View(width, height, agentSize, grid);
+        view.init();*/
         CsvView stats = null;
 		try {
 			stats = new CsvView();
@@ -157,7 +157,7 @@ public class WatorMain {
 			e.printStackTrace();
 		}
         WatorMAS watorMAS = new WatorMAS();
-        watorMAS.addObserver(view);
+        //watorMAS.addObserver(view);
         watorMAS.addObserver(stats);
         watorMAS.init(nbTurn, nbShark, nbFish, fBreed, sBreed, starve, width, height, speed, agentSize, equity, seed, toric);
         watorMAS.run();
@@ -168,5 +168,6 @@ public class WatorMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        System.exit(1);
     }
 }

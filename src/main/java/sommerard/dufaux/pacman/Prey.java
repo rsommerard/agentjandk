@@ -11,12 +11,14 @@ public class Prey extends Agent {
 
     private int mDirX;
     private int mDirY;
+    private int mSpeedRatio;
 
-    public Prey(Environment environment, int posX, int posY) {
-        super(environment, posX, posY);
+    public Prey(Environment environment, int posX, int posY, int speedRatio) {
+        super(environment, posX, posY, speedRatio);
         mDirX = 0;
         mDirY = 0;
         ((PacmanEnvironment)mEnvironment).calculateDikjstra(mPosX, mPosY);
+        System.out.println("Construct prey ["+posY+"]["+posX+"] with ratioSpeed = "+speedRatio);
     }
 
     @Override

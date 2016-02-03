@@ -68,7 +68,9 @@ public abstract class MAS extends Observable {
             List<Agent> agentsBeforeRun = new ArrayList<Agent>();
             agentsBeforeRun.addAll(mAgents);
 			for (Agent agent : agentsBeforeRun) {
-                agent.doIt();
+				if(mCurrentTurn % agent.getSpeedRatio() == 0){
+					agent.doIt();
+				}
 			}
 
 			//System.out.println("turn "+mCurrentTurn);

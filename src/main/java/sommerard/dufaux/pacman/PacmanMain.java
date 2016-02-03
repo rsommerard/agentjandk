@@ -9,11 +9,12 @@ import sommerard.dufaux.core.View;
 public class PacmanMain {
 
     public static final int NB_PREDATOR = 3;
-    public static final int NB_ROCK = 0;
+    public static final int NB_ROCK = 500;
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
   	public static final int AGENT_SIZE = 16;
-    public static final int SPEED = 1000;
+  	public static final double SPEED_RATIO = -2;
+    public static final int SPEED = 100;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;
@@ -28,6 +29,7 @@ public class PacmanMain {
         options.addOption("height", true, "environment height");
         options.addOption("agentSize", true, "agent size");
         options.addOption("speed", true, "speed by turn (ms)");
+        options.addOption("speedRatio", true, "ratio beetween speed of prey and speed of predator. (prey is advantaged if ratio > 1)");
         options.addOption("seed", true, "generation seed (long)");
         options.addOption("grid", "enable grid");
         options.addOption("equity", "enable equity");
@@ -76,7 +78,17 @@ public class PacmanMain {
                 agentSize = tmp;
             }
         }
+        
+        double speedRatio = SPEED_RATIO;
 
+        if (cmd.getOptionValue("speedRatio") != null) {
+        	try{
+        		speedRatio = Double.parseDouble(cmd.getOptionValue("speedRatio"));
+        	}catch(NumberFormatException e){
+        		System.out.println("speed Ratio not double, set with default value : 1");
+        	}
+        }
+        
         int speed = SPEED;
 
         if (cmd.getOptionValue("speed") != null) {
@@ -86,7 +98,7 @@ public class PacmanMain {
                 speed = tmp;
             }
         }
-
+        
         long seed = SEED;
 
         if (cmd.getOptionValue("seed") != null) {
@@ -117,7 +129,7 @@ public class PacmanMain {
         
         
         pacmanMAS.addObserver(view);
-        pacmanMAS.init(nbPredator, nbRock, width, height, speed, agentSize, equity, seed);
+        pacmanMAS.init(nbPredator, nbRock, width, height, speed, speedRatio, agentSize, equity, seed);
         pacmanMAS.run();
 
     }

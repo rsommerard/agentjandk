@@ -9,8 +9,8 @@ import sommerard.dufaux.core.Environment;
 import sommerard.dufaux.core.Position;
 
 public class PacmanEnvironment extends Environment {
-	private int compteur = 0;
 	private boolean mFinish;
+	
 	//private LinkedList<Position> modifiedCells = new LinkedList<Position>();
 	
     public PacmanEnvironment(int width, int height, boolean toric) {
@@ -20,7 +20,6 @@ public class PacmanEnvironment extends Environment {
     
     public void resetDikjstra(){
     	//modifiedCells = new LinkedList<Position>();
-    	compteur = 0;
     	PacmanCell[][] cells = (PacmanCell[][]) mCells; //need to cast
         for (int y = 0; y < mHeight; y++) {
             for (int x = 0; x < mWidth; x++) {
@@ -102,7 +101,6 @@ public class PacmanEnvironment extends Environment {
     
     /*public void calculateDikjstra(int posX, int posY, int cpt) {
     	int globalX, globalY;
-    	compteur++;
     	List<Position> modifiedCells = new ArrayList<Position>();
     	PacmanCell[][] cells = getPacmanNeighbors(posX, posY);
 
@@ -122,7 +120,6 @@ public class PacmanEnvironment extends Environment {
         
         System.out.println("cpt ="+cpt);
 
-        System.out.println("compteur = "+compteur);
         for(Position pos : modifiedCells){
         	calculateDikjstra(pos.getX(),pos.getY(), cpt++);
         }
