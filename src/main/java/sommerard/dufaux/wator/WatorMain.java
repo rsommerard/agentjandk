@@ -148,6 +148,7 @@ public class WatorMain {
 
 		
         View view = new View(width, height, agentSize, grid);
+        view.init();
         CsvView stats = null;
 		try {
 			stats = new CsvView();

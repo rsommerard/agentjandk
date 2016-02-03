@@ -9,11 +9,11 @@ import sommerard.dufaux.core.View;
 public class PacmanMain {
 
     public static final int NB_PREDATOR = 3;
-    public static final int NB_ROCK = 100;
+    public static final int NB_ROCK = 0;
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
   	public static final int AGENT_SIZE = 16;
-    public static final int SPEED = 200;
+    public static final int SPEED = 1000;
     public static final long SEED = 0;
     public static final boolean GRID = true;
     public static final boolean EQUITY = true;

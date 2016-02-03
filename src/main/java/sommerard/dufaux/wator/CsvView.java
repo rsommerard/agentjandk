@@ -26,7 +26,7 @@ public class CsvView implements Observer{
 
 	public void update(Observable o, Object arg) {
 		WatorMAS mas = (WatorMAS) arg;
-		String stats = (mas.getNbFish()/4)+", "+mas.getNbShark();
+		String stats = (mas.getNbFish())+", "+mas.getNbShark();
 		if(mas.getCurrentTurn()%100 == 0){
 			try {
 				//System.out.println("close and re-open");
