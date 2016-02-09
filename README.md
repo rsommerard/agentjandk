@@ -89,7 +89,7 @@ Usage: java -jar wator.jar
   [-equity]
         set the equity of simulation (shuffle beetween each turn). (default: true)
 
-  [-toric]
-        Set the world toric. (default: true)
+  [-noToric]
+        Set the world no toric. (default: toric)
 
 ```
