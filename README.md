@@ -3,6 +3,8 @@
 
 ## BALL
 
+Lancer le jar avec les paramètres par défaut: `java -jar ball.jar`
+
 ```
 Usage: java -jar ball.jar
                           [-nbAgent <NumberOfAgent>] [-nbTurn <numberOfTurn>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-toric]
@@ -26,7 +28,7 @@ Usage: java -jar ball.jar
         waiting time (in ms) beetween each turn. (default: 50)
 
   [-seed <seed>]
-        seed for the generation of random numbers. (default: 0)
+        seed for the generation of random numbers. (default: random)
 
   [-grid]
         set the visiblity of grod. (default: false)
@@ -41,6 +43,8 @@ Usage: java -jar ball.jar
 
 
 ## WATOR
+
+Lancer le jar avec les paramètres par défaut: `java -jar wator.jar`
 
 ```
 Usage: java -jar wator.jar
@@ -77,7 +81,7 @@ Usage: java -jar wator.jar
         waiting time (in ms) beetween each turn. (default: 5)
 
   [-seed <seed>]
-        seed for the generation of random numbers. (default: 0)
+        seed for the generation of random numbers. (default: random)
 
   [-grid]
         set the visiblity of grod. (default: true)
