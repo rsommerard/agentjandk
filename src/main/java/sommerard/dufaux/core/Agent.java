@@ -21,9 +21,9 @@ public abstract class Agent {
         mPosY = posY;
         mEnvironment = environment;
         mSpeedRatio = speedRatio;
-        
+
     }
-    
+
     public abstract Color getColor();
 
     public abstract void doIt();
@@ -35,13 +35,13 @@ public abstract class Agent {
     public int getPosY() {
         return mPosY;
     }
-    
-    public int getSpeedRatio(){
-    	return this.mSpeedRatio;
+
+    public int getSpeedRatio() {
+        return this.mSpeedRatio;
     }
-    
+
     @Override
-    public String toString(){
-    	return this.getClass().getName()+" ["+mPosY+"]["+mPosX+"]";
+    public String toString() {
+        return this.getClass().getName() + " [" + mPosY + "][" + mPosX + "]";
     }
 }

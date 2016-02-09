@@ -2,24 +2,23 @@ package sommerard.dufaux.wator;
 
 import java.io.IOException;
 
-
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
 
 public class WatorMain {
 
-	//super parametre = nb_shark = 500, nb_fish = 500, fish_breed = 4, shark_breed = 10,
-	// starve = 5, with = 120, height = 120, seed = 0, equity = true, toric = true.
+    //super parametre = nb_shark = 500, nb_fish = 500, fish_breed = 4, shark_breed = 10,
+    // starve = 5, with = 120, height = 120, seed = 0, equity = true, toric = true.
     public static final int NB_SHARK = 500;
     public static final int NB_FISH = 500;
-    public static final int FISH_BREED = 6;
-    public static final int SHARK_BREED = 7;
-    public static final int STARVE = 6;
-    public static final int NB_TURN = 3000;
+    public static final int FISH_BREED = 1;
+    public static final int SHARK_BREED = 15;
+    public static final int STARVE = 10;
+    public static final int NB_TURN = 1500;
     public static final int WIDTH = 120;
     public static final int HEIGHT = 120;
-    public static final int AGENT_SIZE =  5;
-    public static final int SPEED = 0;
+    public static final int AGENT_SIZE = 5;
+    public static final int SPEED = 5;
     public static final long SEED = 0;
     public static final boolean GRID = false;
     public static final boolean EQUITY = true;
@@ -146,28 +145,27 @@ public class WatorMain {
             toric = true;
         }
 
-		
-        /*View view = new View(width, height, agentSize, grid);
-        view.init();*/
+        View view = new View(width, height, agentSize, grid);
+        view.init();
         CsvView stats = null;
-		try {
-			stats = new CsvView();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            stats = new CsvView();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         WatorMAS watorMAS = new WatorMAS();
-        //watorMAS.addObserver(view);
+        watorMAS.addObserver(view);
         watorMAS.addObserver(stats);
         watorMAS.init(nbTurn, nbShark, nbFish, fBreed, sBreed, starve, width, height, speed, agentSize, equity, seed, toric);
         watorMAS.run();
-        
+
         try {
-			stats.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            stats.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.exit(1);
     }
 }

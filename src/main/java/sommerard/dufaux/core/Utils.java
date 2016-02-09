@@ -1,9 +1,9 @@
 package sommerard.dufaux.core;
 
 public class Utils {
-	
-	public static int GCD(int a, int b) {
-		   if (b==0) return a;
-		   return GCD(b,a%b);
-		}
+
+    public static int GCD(int a, int b) {
+        if (b == 0) return a;
+        return GCD(b, a % b);
+    }
 }

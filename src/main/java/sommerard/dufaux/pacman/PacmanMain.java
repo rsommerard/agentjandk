@@ -1,6 +1,5 @@
 package sommerard.dufaux.pacman;
 
-import java.awt.event.KeyAdapter;
 import java.util.Random;
 
 import org.apache.commons.cli.*;
@@ -12,8 +11,8 @@ public class PacmanMain {
     public static final int NB_ROCK = 500;
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
-  	public static final int AGENT_SIZE = 16;
-  	public static final double SPEED_RATIO = -2;
+    public static final int AGENT_SIZE = 16;
+    public static final double SPEED_RATIO = -2;
     public static final int SPEED = 100;
     public static final long SEED = 0;
     public static final boolean GRID = true;
@@ -78,17 +77,17 @@ public class PacmanMain {
                 agentSize = tmp;
             }
         }
-        
+
         double speedRatio = SPEED_RATIO;
 
         if (cmd.getOptionValue("speedRatio") != null) {
-        	try{
-        		speedRatio = Double.parseDouble(cmd.getOptionValue("speedRatio"));
-        	}catch(NumberFormatException e){
-        		System.out.println("speed Ratio not double, set with default value : 1");
-        	}
+            try {
+                speedRatio = Double.parseDouble(cmd.getOptionValue("speedRatio"));
+            } catch (NumberFormatException e) {
+                System.out.println("speed Ratio not double, set with default value : 1");
+            }
         }
-        
+
         int speed = SPEED;
 
         if (cmd.getOptionValue("speed") != null) {
@@ -98,13 +97,13 @@ public class PacmanMain {
                 speed = tmp;
             }
         }
-        
+
         long seed = SEED;
 
         if (cmd.getOptionValue("seed") != null) {
             seed = Long.parseLong(cmd.getOptionValue("seed"));
-        }else{
-        	seed = new Random().nextLong();
+        } else {
+            seed = new Random().nextLong();
         }
 
         boolean grid = GRID;
@@ -120,14 +119,14 @@ public class PacmanMain {
         }
 
         boolean dijkstra = DIJKSTRA;
-        
+
+        PacmanMAS pacmanMAS = new PacmanMAS();
         View view = new PacmanView(width, height, agentSize, grid, dijkstra);
         view.init();
-        KeyboardListener keyAdaptator = new KeyboardListener();
-        view.addKeyListener(keyAdaptator);
-        PacmanMAS pacmanMAS = new PacmanMAS(keyAdaptator);
-        
-        
+        view.addKeyListener(pacmanMAS.getKeyboardListener());
+
+
+
         pacmanMAS.addObserver(view);
         pacmanMAS.init(nbPredator, nbRock, width, height, speed, speedRatio, agentSize, equity, seed);
         pacmanMAS.run();

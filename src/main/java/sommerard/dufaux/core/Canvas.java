@@ -6,16 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
-public class Canvas extends JPanel{
-	
+public class Canvas extends JPanel {
+
     protected MAS mMas;
     private boolean mGrid;
     protected int mAgentSize;
     protected int mWidth;
     protected int mHeight;
-	
+
     public Canvas(int width, int height, int agentSize, boolean grid) {
         mWidth = width;
         mHeight = height;
@@ -26,8 +25,8 @@ public class Canvas extends JPanel{
     }
 
     public void paintComponent(Graphics g) {
-    	//System.out.println("paint component");
-    	if (mGrid) {
+        //System.out.println("paint component");
+        if (mGrid) {
             paintGrid(g);
         }
         paintAgents(g);
@@ -40,13 +39,13 @@ public class Canvas extends JPanel{
 
         List<Agent> agents = new ArrayList<Agent>(mMas.getAgents());
 
-        for(Agent agent : agents) {
-        	if(agent != null){
-        		graphics.setColor(agent.getColor());
-        		graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize), mAgentSize, mAgentSize);
-        	}
+        for (Agent agent : agents) {
+            if (agent != null) {
+                graphics.setColor(agent.getColor());
+                graphics.fillRect(agent.getPosX() * mAgentSize, (agent.getPosY() * mAgentSize), mAgentSize, mAgentSize);
+            }
         }
-        
+
     }
 
     private void paintGrid(Graphics graphics) {
@@ -61,7 +60,7 @@ public class Canvas extends JPanel{
         }
     }
 
-	public void setMas(MAS mas) {
-		this.mMas = mas;
-	}
+    public void setMas(MAS mas) {
+        this.mMas = mas;
+    }
 }

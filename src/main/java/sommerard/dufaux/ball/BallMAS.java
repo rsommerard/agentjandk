@@ -32,7 +32,7 @@ public class BallMAS extends MAS {
 
         Collections.shuffle(positions, mRandom);
 
-        for(int i = 0; i < mNbAgent; i++) {
+        for (int i = 0; i < mNbAgent; i++) {
             if (positions.isEmpty()) {
                 return;
             }
@@ -44,7 +44,7 @@ public class BallMAS extends MAS {
             int dirX = mRandom.nextInt(2) - 1;
             int dirY = mRandom.nextInt(2) - 1;
 
-            while(dirX == 0 && dirY == 0) {
+            while (dirX == 0 && dirY == 0) {
                 dirX = mRandom.nextInt(2) - 1;
                 dirY = mRandom.nextInt(2) - 1;
             }

@@ -7,8 +7,8 @@ import java.awt.*;
 
 public class PacmanCanvas extends Canvas {
 
-	private boolean mDijkstra;
-	
+    private boolean mDijkstra;
+
     public PacmanCanvas(int width, int height, int agentSize, boolean grid, boolean dijkstra) {
         super(width, height, agentSize, grid);
         mDijkstra = dijkstra;
@@ -19,7 +19,7 @@ public class PacmanCanvas extends Canvas {
             return;
         }
 
-        PacmanCell[][] cells = ((PacmanEnvironment)mMas.getEnvironment()).getCells();
+        PacmanCell[][] cells = ((PacmanEnvironment) mMas.getEnvironment()).getCells();
 
         for (int y = 0; y < mHeight; y++) {
             for (int x = 0; x < mWidth; x++) {
@@ -28,10 +28,10 @@ public class PacmanCanvas extends Canvas {
                     graphics.setColor(agent.getColor());
                     graphics.fillRect(x * mAgentSize, (y * mAgentSize), mAgentSize, mAgentSize);
                 } else {
-                	if(mDijkstra){
-                    graphics.setColor(Color.BLACK);
-                    graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize)+1, (y * mAgentSize)+mAgentSize-1);
-                	}
+                    if (mDijkstra) {
+                        graphics.setColor(Color.BLACK);
+                        graphics.drawString(String.valueOf(cells[y][x].getDijkstraValue()), (x * mAgentSize) + 1, (y * mAgentSize) + mAgentSize - 1);
+                    }
                 }
             }
         }

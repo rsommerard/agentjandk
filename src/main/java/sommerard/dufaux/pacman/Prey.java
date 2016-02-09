@@ -11,14 +11,12 @@ public class Prey extends Agent {
 
     private int mDirX;
     private int mDirY;
-    private int mSpeedRatio;
 
     public Prey(Environment environment, int posX, int posY, int speedRatio) {
         super(environment, posX, posY, speedRatio);
         mDirX = 0;
         mDirY = 0;
-        ((PacmanEnvironment)mEnvironment).calculateDikjstra(mPosX, mPosY);
-        System.out.println("Construct prey ["+posY+"]["+posX+"] with ratioSpeed = "+speedRatio);
+        ((PacmanEnvironment) mEnvironment).calculateDikjstra(mPosX, mPosY);
     }
 
     @Override
@@ -27,9 +25,10 @@ public class Prey extends Agent {
     }
 
     public void doIt() {
-    	if(((PacmanEnvironment)mEnvironment).getFinish()){
-    		return;
-    	}
+        if (((PacmanEnvironment) mEnvironment).getFinish()) {
+            return;
+        }
+
         Cell[][] neighbors = mEnvironment.getNeighbors(mPosX, mPosY);
 
         Cell nextCell = neighbors[mDirY + 1][mDirX + 1];
@@ -39,8 +38,8 @@ public class Prey extends Agent {
         } else {
             if (nextCell.getAgent() == null) {
                 moveAgent(neighbors);
-                ((PacmanEnvironment)mEnvironment).resetDikjstra();
-                ((PacmanEnvironment)mEnvironment).calculateDikjstra(mPosX, mPosY);
+                ((PacmanEnvironment) mEnvironment).resetDikjstra();
+                ((PacmanEnvironment) mEnvironment).calculateDikjstra(mPosX, mPosY);
             }
         }
     }
@@ -51,41 +50,37 @@ public class Prey extends Agent {
         mPosX = mPosX + mDirX;
         mPosY = mPosY + mDirY;
     }
-    
-    
-    /**
-     * use arrow key or qzsd to move.
-     * @param e
-     */
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q){
-			mDirX= -1;
-		}
-		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
-			mDirX= 1;
-		}
-		if(key == KeyEvent.VK_UP || key == KeyEvent.VK_Z){
-			mDirY= -1;
-		}
-		if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S){
-			mDirY= 1;
-		}
-	}
 
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q){
-			mDirX= 0;
-		}
-		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
-			mDirX= 0;
-		}
-		if(key == KeyEvent.VK_UP || key == KeyEvent.VK_Z){
-			mDirY= 0;
-		}
-		if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S){
-			mDirY= 0;
-		}
-	}
+
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q) {
+            mDirX = -1;
+        }
+        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+            mDirX = 1;
+        }
+        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_Z) {
+            mDirY = -1;
+        }
+        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+            mDirY = 1;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_Q) {
+            mDirX = 0;
+        }
+        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+            mDirX = 0;
+        }
+        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_Z) {
+            mDirY = 0;
+        }
+        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+            mDirY = 0;
+        }
+    }
 }

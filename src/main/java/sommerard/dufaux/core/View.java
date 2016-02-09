@@ -3,7 +3,6 @@ package sommerard.dufaux.core;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class View extends JFrame implements Observer {
 
@@ -13,9 +12,7 @@ public class View extends JFrame implements Observer {
     protected int mWidth;
     protected int mHeight;
     protected Canvas mCanvas;
-    
-    
-    //private static final int TOP_OFFSET = 20;
+
     private static final int TOP_OFFSET = 34;
 
     public View(int width, int height, int agentSize, boolean grid) {
@@ -26,8 +23,8 @@ public class View extends JFrame implements Observer {
         mGrid = grid;
         mAgentSize = agentSize;
     }
-    
-    public void init(){
+
+    public void init() {
         createCanvas();
 
         this.setLayout(new BorderLayout());
@@ -43,10 +40,10 @@ public class View extends JFrame implements Observer {
         mCanvas = new Canvas(mWidth, mHeight, mAgentSize, mGrid);
     }
 
-    public void update(Observable o, Object arg) {    	
+    public void update(Observable o, Object arg) {
 
         mMas = (MAS) arg;
         mCanvas.setMas(mMas);
         repaint();
-	}
+    }
 }
