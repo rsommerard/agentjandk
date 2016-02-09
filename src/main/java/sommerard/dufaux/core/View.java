@@ -45,5 +45,6 @@ public class View extends JFrame implements Observer {
         mMas = (MAS) arg;
         mCanvas.setMas(mMas);
         repaint();
+        setVisible(true);
     }
 }
