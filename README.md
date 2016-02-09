@@ -3,6 +3,8 @@
 
 ## BALL
 
+Lancer le jar avec les paramètres par défaut: `java -jar ball.jar`
+
 ```
 Usage: java -jar ball.jar
                           [-nbAgent <NumberOfAgent>] [-nbTurn <numberOfTurn>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-toric]
@@ -26,7 +28,7 @@ Usage: java -jar ball.jar
         waiting time (in ms) beetween each turn. (default: 50)
 
   [-seed <seed>]
-        seed for the generation of random numbers. (default: 0)
+        seed for the generation of random numbers. (default: random)
 
   [-grid]
         set the visiblity of grod. (default: false)
@@ -42,6 +44,8 @@ Usage: java -jar ball.jar
 
 ## WATOR
 
+Lancer le jar avec les paramètres par défaut: `java -jar wator.jar`
+
 ```
 Usage: java -jar wator.jar
                           [-nbShark <NumberOfShark>] [-nbFish <numberOfFish>] [-fBreed <fishBreed>] [-sBreed <sharkBreed>] [-starve <SharkStarve>] [-nbTurn <numberOfTurn>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-toric]
@@ -53,13 +57,13 @@ Usage: java -jar wator.jar
         number of fish at the beginning of simulation (default: 500)
 
   [-fBreed <fishBreed>]
-        number of turn for the fish to breed (default: 4)
+        number of turn for the fish to breed (default: 1)
 
   [-sBreed <sharkBreed>]
         number of turn for the shark to breed (default: 10)
 
   [-starve <SharkStarve>]
-        number of turn for the shark to die (default: 5)
+        number of turn for the shark to die (default: 15)
 
   [-nbTurn <numberOfTurn>]
         number of turn of the simulation. (default: 1000000)
@@ -77,15 +81,15 @@ Usage: java -jar wator.jar
         waiting time (in ms) beetween each turn. (default: 5)
 
   [-seed <seed>]
-        seed for the generation of random numbers. (default: 0)
+        seed for the generation of random numbers. If 42 then random seed. (default: 0)
 
   [-grid]
-        set the visiblity of grod. (default: true)
+        set the visiblity of grod. (default: false)
 
   [-equity]
         set the equity of simulation (shuffle beetween each turn). (default: true)
 
-  [-toric]
-        Set the world toric. (default: true)
+  [-noToric]
+        Set the world no toric. (default: toric)
 
 ```
