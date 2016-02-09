@@ -57,13 +57,13 @@ Usage: java -jar wator.jar
         number of fish at the beginning of simulation (default: 500)
 
   [-fBreed <fishBreed>]
-        number of turn for the fish to breed (default: 4)
+        number of turn for the fish to breed (default: 1)
 
   [-sBreed <sharkBreed>]
         number of turn for the shark to breed (default: 10)
 
   [-starve <SharkStarve>]
-        number of turn for the shark to die (default: 5)
+        number of turn for the shark to die (default: 15)
 
   [-nbTurn <numberOfTurn>]
         number of turn of the simulation. (default: 1000000)
