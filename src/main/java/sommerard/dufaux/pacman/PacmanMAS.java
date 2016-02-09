@@ -48,6 +48,7 @@ public class PacmanMAS extends MAS {
             predatorSpeed = (int) Math.round(ratio);
             preySpeed = preySpeed * 10;
         }
+        
         int gcd = Utils.GCD(predatorSpeed, preySpeed);
         predatorSpeed = predatorSpeed / gcd;
         preySpeed = preySpeed / gcd;

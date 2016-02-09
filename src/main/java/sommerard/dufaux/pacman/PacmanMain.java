@@ -11,13 +11,13 @@ public class PacmanMain {
     public static final int NB_ROCK = 500;
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
-    public static final int AGENT_SIZE = 16;
-    public static final double SPEED_RATIO = -2;
+    public static final int AGENT_SIZE = 14;
+    public static final double SPEED_RATIO = 2;
     public static final int SPEED = 100;
     public static final long SEED = 0;
-    public static final boolean GRID = true;
-    public static final boolean EQUITY = true;
-    public static final boolean DIJKSTRA = true;
+    public static final boolean GRID = false;
+    public static final boolean EQUITY = false;
+    public static final boolean DIJKSTRA = false;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {
@@ -32,6 +32,7 @@ public class PacmanMain {
         options.addOption("seed", true, "generation seed (long)");
         options.addOption("grid", "enable grid");
         options.addOption("equity", "enable equity");
+        options.addOption("dijkstra", "enable display of dijkstra");
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
@@ -91,12 +92,13 @@ public class PacmanMain {
         int speed = SPEED;
 
         if (cmd.getOptionValue("speed") != null) {
-            int tmp = Integer.parseInt(cmd.getOptionValue("speed"));
-
-            if (tmp < 0) {
+            speed = Integer.parseInt(cmd.getOptionValue("speed"));
+            
+            if (speed < 0) {
                 speed = 0;
             }
         }
+        
 
         long seed = SEED;
 
@@ -120,6 +122,10 @@ public class PacmanMain {
 
         boolean dijkstra = DIJKSTRA;
 
+        if (cmd.hasOption("dijkstra")) {
+        	dijkstra = true;
+        }
+        
         PacmanMAS pacmanMAS = new PacmanMAS();
         View view = new PacmanView(width, height, agentSize, grid, dijkstra);
         view.init();

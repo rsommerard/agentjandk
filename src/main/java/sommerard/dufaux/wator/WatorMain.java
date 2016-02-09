@@ -122,7 +122,6 @@ public class WatorMain {
             }
         }
         
-        System.out.println(speed);
 
         long seed = SEED;
 

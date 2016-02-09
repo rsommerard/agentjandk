@@ -48,7 +48,7 @@ Lancer le jar avec les paramètres par défaut: `java -jar wator.jar`
 
 ```
 Usage: java -jar wator.jar
-                          [-nbShark <NumberOfShark>] [-nbFish <numberOfFish>] [-fBreed <fishBreed>] [-sBreed <sharkBreed>] [-starve <SharkStarve>] [-nbTurn <numberOfTurn>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-toric]
+                          [-nbShark <NumberOfShark>] [-nbFish <numberOfFish>] [-fBreed <fishBreed>] [-sBreed <sharkBreed>] [-starve <SharkStarve>] [-nbTurn <numberOfTurn>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-noToric]
 
   [-nbShark <NumberOfShark>]
         number of shark at the beginning of simulation (default: 500)
@@ -91,5 +91,50 @@ Usage: java -jar wator.jar
 
   [-noToric]
         Set the world no toric. (default: toric)
+
+```
+
+
+
+## PACMAN
+
+Lancer le jar avec les paramètres par défaut: `java -jar pacman.jar`
+
+```
+Usage: java -jar pacman.jar
+                          [-nbPredator <NumberOfPredator>] [-nbRock <NumberOfRock>] [-width <width>] [-height <height>] [-agentSize <sizeOfAgent>] [-speedRatio <speedRatioWithPredator>] [-speed <speed>] [-seed <seed>] [-grid] [-equity] [-dijkstra]
+
+  [-nbPredator <NumberOfPredator>]
+        number of predator at the beginning of simulation (default: 3)
+
+  [-nbRock <NumberOfRock>]
+        number of rock at the beginning of simulation (default: 500)
+
+  [-width <width>]
+        Width of the window. (default: 50)
+
+  [-height <height>]
+        Height of the window. (default: 50)
+
+  [-agentSize <sizeOfAgent>]
+        Size of one Agent in pixel. (default: 14)
+
+  [-speedRatio <speedRatioWithPredator>]
+        ratio Speed beetween Prey and predator. speedPrey = ratio * speedPredator (default: 2)
+
+  [-speed <speed>]
+        waiting time (in ms) beetween each turn. (default: 100)
+
+  [-seed <seed>]
+        seed for the generation of random numbers. (default: random)
+
+  [-grid]
+        set the visiblity of grod. (default: false)
+
+  [-equity]
+        set the equity of simulation (shuffle beetween each turn). (default: true)
+
+  [-dijkstra]
+        Set the world no toric. (default: false)
 
 ```
