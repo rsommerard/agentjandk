@@ -22,7 +22,7 @@ public class Shark extends Animal {
 
         if (randomState) {
             mBreed = random.nextInt(breed);
-            mStarve = random.nextInt(starve - 1);
+            mStarve = random.nextInt(Math.max(1,(starve - 1)));
             return;
         }
         mStarve = 0;

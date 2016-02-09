@@ -1,11 +1,13 @@
 package sommerard.dufaux.ball;
 
+import java.util.Random;
+
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
 
 public class BallMain {
 
-    public static final int NB_AGENT = 400;
+    public static final int NB_AGENT = 2;
     public static final int NB_TURN = 1000000;
     public static final int WIDTH = 120;
     public static final int HEIGHT = 120;
@@ -14,7 +16,7 @@ public class BallMain {
     public static final long SEED = 0;
     public static final boolean GRID = false;
     public static final boolean EQUITY = false;
-    public static final boolean TORIC = false;
+    public static final boolean TORIC = true;
 
 
     public static void main(String[] args) throws InterruptedException, ParseException {
@@ -78,10 +80,10 @@ public class BallMain {
         int speed = SPEED;
 
         if (cmd.getOptionValue("speed") != null) {
-            int tmp = Integer.parseInt(cmd.getOptionValue("speed"));
-
-            if (tmp > 10) {
-                speed = tmp;
+            speed = Integer.parseInt(cmd.getOptionValue("speed"));
+            
+            if (speed < 0) {
+                speed = 0;
             }
         }
 
@@ -89,6 +91,8 @@ public class BallMain {
 
         if (cmd.getOptionValue("seed") != null) {
             seed = Long.parseLong(cmd.getOptionValue("seed"));
+        } else {
+            seed = new Random().nextLong();
         }
 
         boolean grid = GRID;

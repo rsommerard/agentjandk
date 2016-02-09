@@ -43,8 +43,8 @@ public class Ball extends Agent {
     private void moveAgent(Cell[][] neighbors) {
         neighbors[1][1].setAgent(null);
         neighbors[mDirY + 1][mDirX + 1].setAgent(this);
-        mPosX = mPosX + mDirX;
-        mPosY = mPosY + mDirY;
+        mPosX = Math.floorMod((mPosX + mDirX) , mEnvironment.getWidth());
+        mPosY = Math.floorMod((mPosY + mDirY) , mEnvironment.getHeight());
     }
 
     private void changeDir(Cell[][] neighbors) {

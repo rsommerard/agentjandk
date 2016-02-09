@@ -1,6 +1,7 @@
 package sommerard.dufaux.wator;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.commons.cli.*;
 import sommerard.dufaux.core.View;
@@ -14,7 +15,7 @@ public class WatorMain {
     public static final int FISH_BREED = 1;
     public static final int SHARK_BREED = 15;
     public static final int STARVE = 10;
-    public static final int NB_TURN = 1500;
+    public static final int NB_TURN = 1000000;
     public static final int WIDTH = 120;
     public static final int HEIGHT = 120;
     public static final int AGENT_SIZE = 5;
@@ -40,7 +41,7 @@ public class WatorMain {
         options.addOption("seed", true, "generation seed (long)");
         options.addOption("grid", "enable grid");
         options.addOption("equity", "enable equity");
-        options.addOption("toric", "enable toric environment");
+        options.addOption("noToric", "enable toric environment");
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
@@ -114,17 +115,22 @@ public class WatorMain {
         int speed = SPEED;
 
         if (cmd.getOptionValue("speed") != null) {
-            int tmp = Integer.parseInt(cmd.getOptionValue("speed"));
-
-            if (tmp > 10) {
-                speed = tmp;
+            speed = Integer.parseInt(cmd.getOptionValue("speed"));
+            
+            if (speed < 0) {
+                speed = 0;
             }
         }
+        
+        System.out.println(speed);
 
         long seed = SEED;
 
         if (cmd.getOptionValue("seed") != null) {
             seed = Long.parseLong(cmd.getOptionValue("seed"));
+        	if(Integer.parseInt(cmd.getOptionValue("seed")) == 42) {
+        		seed = new Random().nextLong();
+        	}
         }
 
         boolean grid = GRID;
@@ -141,8 +147,8 @@ public class WatorMain {
 
         boolean toric = TORIC;
 
-        if (cmd.hasOption("toric")) {
-            toric = true;
+        if (cmd.hasOption("noToric")) {
+            toric = false;
         }
 
         View view = new View(width, height, agentSize, grid);

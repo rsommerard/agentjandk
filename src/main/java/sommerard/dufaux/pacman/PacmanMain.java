@@ -93,8 +93,8 @@ public class PacmanMain {
         if (cmd.getOptionValue("speed") != null) {
             int tmp = Integer.parseInt(cmd.getOptionValue("speed"));
 
-            if (tmp > 10) {
-                speed = tmp;
+            if (tmp < 0) {
+                speed = 0;
             }
         }
 
