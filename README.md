@@ -81,10 +81,10 @@ Usage: java -jar wator.jar
         waiting time (in ms) beetween each turn. (default: 5)
 
   [-seed <seed>]
-        seed for the generation of random numbers. (default: random)
+        seed for the generation of random numbers. If 42 then random seed. (default: 0)
 
   [-grid]
-        set the visiblity of grod. (default: true)
+        set the visiblity of grod. (default: false)
 
   [-equity]
         set the equity of simulation (shuffle beetween each turn). (default: true)
